@@ -1,0 +1,275 @@
+<!-- home.html -->
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Home - Ticketmaven
+{% endblock %}
+
+{% block content %}
+<style>
+    /* Define the keyframes for the animation */
+@keyframes rotateCog {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Apply the animation to the cog when the button is hovered over */
+button:hover .cog {
+    animation: rotateCog 2s linear infinite; /* Change the duration and timing function as needed */
+}
+    
+/* Define the keyframes for the animation */
+@keyframes driveCart {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
+    100% { transform: translateX(0); }
+}
+
+/* Apply the animation to the cart when the button is hovered over */
+button:hover .cart {
+    animation: driveCart 1s ease-in-out infinite; /* Adjust the duration and timing function as needed */
+}
+
+</style>
+
+
+<section class="jarallax  py-0 "  data-jarallax data-speed="0.4">
+    <span class="position-absolute top-0 start-0 w-100 h-100"></span>
+
+    <span class="position-absolute top-0 start-0 w-100 h-100 " id="particles-js"></span>
+
+    <div class="position-relative text-center zindex-5 overflow-hidden pt-4 py-md-5">
+        <!-- Slider controls (Prev / next) -->
+        <button type="button" id="ticket-prev" class="btn btn-prev btn-icon btn-xl bg-transparent shadow-none position-absolute top-50 start-0 translate-middle-y d-none d-md-inline-flex ms-n3 ms-lg-2" aria-label="Previous">
+            <i class="bx bx-chevron-left fs-1"></i>
+        </button>
+        <button type="button" id="ticket-next" class="btn btn-next btn-icon btn-xl bg-transparent shadow-none position-absolute top-50 end-0 translate-middle-y d-none d-md-inline-flex me-n3 me-lg-2" aria-label="Next">
+            <i class="bx bx-chevron-right fs-1"></i>
+        </button>
+        <!-- Slider -->
+        <div class="container text-center py-1 mt-5">
+            <div class="row justify-content-center ">
+                <div class="col-xl-8 col-lg-9 col-md-10 col-11">
+                    <div class="swiper pt-1 pb-2 py-md-2" data-swiper-options='{
+                      "effect": "fade",
+                      "speed": 500,
+                      "autoplay": {
+                        "delay": 5500,
+                        "disableOnInteraction": false
+                      },
+                      "pagination": {
+                        "el": ".swiper-pagination",
+                        "clickable": true
+                      },
+                      "navigation": {
+                        "prevEl": "#ticket-prev",
+                        "nextEl": "#ticket-next"
+                      }
+                    }'>
+                    <div class="swiper-wrapper">
+                        <!-- Item -->
+                        <div class="swiper-slide">
+                            <h2 class="from-start ">Automate Ticket Purchases</h2>
+                            <div class="from-end">
+                                <p class="fs-s  opacity-70 ">Streamline ticket purchases with automated solutions. Ensure you secure tickets for premier soccer teams before they run out.</p>
+                            </div>
+                            <div class="scale-up delay-1 mb-1">
+                                <a href="{% url 'account:login' %}"class="btn btn-primary shadow-primary btn-lg">Start automating</a>
+                            </div>
+                        </div>
+                        <!-- Item -->
+                        <div class="swiper-slide">
+                            <h2 class="from-start ">Track Ticket Availability</h2>
+                            <div class="from-end">
+                                <p class="fs-s opacity-70 ">Stay updated on ticket availability for your favorite soccer matches. Receive real-time alerts and notifications.</p>
+                            </div>
+                            <div class="scale-up delay-1 mb-1">
+                                <a href="{% url 'account:login' %}" class="btn btn-primary shadow-primary btn-lg">Track now</a>
+                            </div>
+                        </div>
+                        <!-- Item -->
+                        <div class="swiper-slide ">
+                            <h2 class="from-start ">Personalize Ticket Preferences</h2>
+                            <div class="from-end">
+                                <p class="fs-s  opacity-70  ">Customize ticket preferences based on team, seating, and match preferences. Ensure you get the best tickets tailored to your needs.</p>
+                            </div>
+                            <div class="scale-up delay-1 mb-1">
+                                <a href="{% url 'account:login' %}" class="btn btn-primary shadow-primary btn-lg">Learn more</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                        <!-- Pagination (bullets) -->
+                        <div class="swiper-pagination position-relative d-md-none pt-2 mt-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="container pt-1 pb-2 mt-1 mt-sm-4 mt-xl-5">
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs flex-nowrap justify-content-lg-center overflow-auto pb-2 mb-3 mb-lg-4" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link text-nowrap active " id="ticket-management-tab" data-bs-toggle="tab" data-bs-target="#ticket-management" type="button" role="tab" aria-controls="ticket-management" aria-selected="true">
+                <i class="fa fa-shopping-cart fs-lg opacity-60 me-2 cart" aria-hidden="true"></i>
+                Ticket Management
+            </button>
+            
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link text-nowrap" id="ticket-automation-tab" data-bs-toggle="tab" data-bs-target="#ticket-automation" type="button" role="tab" aria-controls="ticket-automation" aria-selected="false">
+                <i class="fa fa-cogs fs-lg opacity-60 me-2 cog " aria-hidden="true"></i>
+                Ticket Automation
+            </button>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content bg-secondary rounded-3 py-4">
+
+        <!-- Ticket Management -->
+        <div class="tab-pane fade show active" id="ticket-management" role="tabpanel" aria-labelledby="ticket-management-tab">
+            <div class="row align-items-center pt-3 pt-sm-4 pt-md-0 px-3 px-sm-4 px-lg-0">
+                <div class="col-lg-4 col-md-5 offset-lg-1 text-center text-md-start">
+                    <h3 class="mb-lg-4">Ticket Management</h3>
+                    <p>Effortlessly manage your event tickets with our comprehensive ticket management solution. Sell tickets online, manage attendee data, and streamline event check-ins.</p>
+                </div>
+                <div class="col-lg-6 col-md-7 mt-md-4">
+                    <!-- Add relevant ticket management image here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Ticket Automation -->
+        <div class="tab-pane fade" id="ticket-automation" role="tabpanel" aria-labelledby="ticket-automation-tab">
+            <div class="row align-items-center pt-3 pb-2 pb-sm-3 pt-sm-4 pt-md-0 px-3 px-sm-4 px-lg-0">
+                <div class="col-lg-4 col-md-5 offset-lg-1 text-center text-md-start">
+                    <h3 class="mb-lg-4">Ticket Automation</h3>
+                    <p>Automate your ticket purchasing process with our advanced ticket automation features. Scan for available tickets, set preferences, and let our system automatically purchase tickets for you.</p>
+                </div>
+                <div class="col-lg-6 col-md-7 mt-md-4">
+                    <!-- Add relevant ticket automation image here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+<section class="bg-secondary py-5">
+    <div class="container py-2 py-md-3 py-lg-4 py-xl-5">
+        <div class="row row-cols-1 row-cols-md-2 gx-3 gx-lg-4">
+            <div class="col-md-6 mb-3 mb-md-0">
+                <div class="card border-0 bg-dark h-100 p-xl-4">
+                    <div class="card-body">
+                        <h2 class="display-1 text-light">420k</h2>
+                        <p class="lead fw-medium text-light"><span class="opacity-70">users are leveraging our</span> <span class="fw-bold">Ticket Automation Platform</span><span class="opacity-70">. It’s a revolutionary solution to secure your tickets hassle-free and never miss out on your favorite events.</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card border-0 shadow-sm p-4 p-xxl-5">
+                    <div class="d-flex justify-content-between pb-4 mb-2">
+                        <span class="btn btn-icon btn-primary btn-lg shadow-primary pe-none">
+                            <i class="fa fa-quote-left"></i>
+                        </span>
+                        <div class="d-flex">
+                            <button type="button" id="testimonials-prev" class="btn btn-prev btn-icon btn-sm me-2" aria-label="Previous">
+                                <i class="fa fa-chevron-left"></i>
+                            </button>
+                            <button type="button" id="testimonials-next" class="btn btn-next btn-icon btn-sm ms-2" aria-label="Next">
+                                <i class="fa fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Slider -->
+                    <div class="swiper mx-0 mb-md-n2 mb-xxl-n3" data-swiper-options='{
+                        "spaceBetween": 24,
+                        "loop": true,
+                        "pagination": {
+                            "el": ".swiper-pagination",
+                            "clickable": true
+                        },
+                        "navigation": {
+                            "prevEl": "#testimonials-prev",
+                            "nextEl": "#testimonials-next"
+                        }
+                    }'>
+                        <div class="swiper-wrapper">
+  
+                            <!-- Item -->
+                            <div class="swiper-slide h-auto">
+                                <figure class="card h-100 position-relative border-0 bg-transparent">
+                                    <blockquote class="card-body p-0 mb-0">
+                                        <p class="fs-lg mb-0">Our company has witnessed a significant increase in ticket acquisition success since implementing this platform. It's incredibly user-friendly and customizable, catering perfectly to our needs.</p>
+                                    </blockquote>
+                                    <figcaption class="card-footer border-0 d-flex align-items-center w-100 pb-2">
+                                        <img src="{% static 'assets/img/avatar/14.jpg' %}" width="60" class="rounded-circle" alt="Annette Black">
+                                        <div class="ps-3">
+                                            <h6 class="fw-semibold lh-base mb-0">Annette Black</h6>
+                                            <span class="fs-sm text-muted">CEO at XYZ Corp</span>
+                                        </div>
+                                    </figcaption>
+                                </figure>
+                            </div>
+  
+                            <!-- Item -->
+                            <div class="swiper-slide h-auto">
+                                <figure class="card h-100 position-relative border-0 bg-transparent">
+                                    <blockquote class="card-body p-0 mb-0">
+                                        <p class="fs-lg mb-0">The platform's seamless integration and intuitive interface have significantly improved our ticket acquisition process. It's been a game-changer for our team, allowing us to secure tickets effortlessly.</p>
+                                    </blockquote>
+                                    <figcaption class="card-footer border-0 d-flex align-items-center w-100 pb-2">
+                                        <img src="{% static 'assets/img/avatar/13.jpg' %}" width="60" class="rounded-circle" alt="Ralph Edwards">
+                                        <div class="ps-3">
+                                            <h6 class="fw-semibold lh-base mb-0">Ralph Edwards</h6>
+                                            <span class="fs-sm text-muted">CTO at ABC Solutions</span>
+                                        </div>
+                                    </figcaption>
+                                </figure>
+                            </div>
+  
+                            <!-- Item -->
+                            <div class="swiper-slide h-auto">
+                                <figure class="card h-100 position-relative border-0 bg-transparent">
+                                    <blockquote class="card-body p-0 mb-0">
+                                        <p class="fs-lg mb-0">This platform has streamlined our ticket acquisition process and improved our chances of securing tickets for premier events. The automation features have saved us countless hours and made the process hassle-free.</p>
+                                    </blockquote>
+                                    <figcaption class="card-footer border-0 d-flex align-items-center w-100 pb-2">
+                                        <img src="{% static 'assets/img/avatar/11.jpg' %}" width="60" class="rounded-circle" alt="Darrell Steward">
+                                        <div class="ps-3">
+                                            <h6 class="fw-semibold lh-base mb-0">Darrell Steward</h6>
+                                            <span class="fs-sm text-muted">COO at PQR Enterprises</span>
+                                        </div>
+                                    </figcaption>
+                                </figure>
+                            </div>
+                        </div>
+  
+                        <!-- Pagination (bullets) -->
+                        <div class="swiper-pagination position-relative mt-5"></div>
+                    </div>        
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+  
+
+  
+
+
+
+    <!-- Include additional content here -->
+{% endblock %}

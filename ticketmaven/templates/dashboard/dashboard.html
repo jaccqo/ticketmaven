@@ -1,0 +1,2316 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <title>Dashboard | {{request.user.first_name}}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+        <meta content="MavenTickets" name="jack" />
+
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{% static 'dash-assets/images/favicon.ico' %}">
+
+<!-- Daterangepicker css -->
+<link rel="stylesheet" href="{% static 'dash-assets/vendor/daterangepicker/daterangepicker.css' %}">
+
+<!-- Vector Map css -->
+<link rel="stylesheet" href="{% static 'dash-assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css' %}">
+
+<!-- Theme Config Js -->
+<script src="{% static 'dash-assets/js/hyper-config.js' %}"></script>
+
+<!-- App css -->
+
+<link href="{% static 'dash-assets/css/app-saas.min.css' %}" rel="stylesheet" type="text/css" id="app-style" />
+
+<!-- Icons css -->
+<link href="{% static 'dash-assets/css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+    .dot {
+        height: 8px; /* Adjust height as needed */
+        width: 8px; /* Adjust width as needed */
+        background-color: #03fc73;
+        border-radius: 50%;
+        display: inline-block;
+        margin-left: 5px; /* Adjust margin-left as needed */
+        animation: emit 2s infinite; /* Adjust duration and other animation properties as needed */
+    }
+    
+    @keyframes emit {
+        0% {
+            transform: scale(1);
+            border: 2px solid rgba(204, 204, 204, 0.5); /* Initial border color with faded opacity */
+        }
+        25% {
+            transform: scale(1.5); /* Scale up */
+            border: 2px solid rgba(204, 204, 204, 0.75); /* Faded opacity */
+        }
+        50% {
+            transform: scale(1.8); /* Scale up more */
+            border: 2px solid rgba(204, 204, 204, 0.85); /* More faded opacity */
+        }
+        60% {
+            transform: scale(2); /* Maximum scale */
+            border: 2px solid rgba(204, 204, 204, 0.9); /* Almost fully transparent */
+        }
+        100% {
+            transform: scale(1); /* Back to original scale */
+            border: 2px solid rgba(204, 204, 204, 0.5); /* Final border color with faded opacity */
+        }
+    }
+    
+    
+    
+    
+</style>
+
+    </head>
+
+    <body>
+        <!-- Begin page -->
+        <div class="wrapper">
+
+            {% csrf_token %}
+
+            
+            <!-- ========== Topbar Start ========== -->
+            <div class="navbar-custom">
+                <div class="topbar container-fluid">
+                    <span class="position-absolute top-0 start-0 w-100 h-100 " id="dots-particles-js"></span>
+                    <div class="d-flex align-items-center gap-lg-2 gap-1">
+
+                        <!-- Topbar Brand Logo -->
+                        <div class="logo-topbar">
+                            <!-- Logo light -->
+                            <a href="index.html" class="logo-light">
+                                <span class="logo-lg">
+                                    <img src="assets/images/logo.png" alt="logo">
+                                </span>
+                                <span class="logo-sm">
+                                    <img src="assets/images/logo-sm.png" alt="small logo">
+                                </span>
+                            </a>
+
+                            <!-- Logo Dark -->
+                           
+                                <a href="{%url 'core:home'%}" class="navbar-brand pe-3">
+                                    <img
+                                      src="{% static 'assets/img/maven_logo2.png' %}"
+                                      width="120"
+                                      alt="Ticketmaven"
+                                    />
+                                   
+                                  </a>
+                                 
+                     
+                        </div>
+
+                        <!-- Sidebar Menu Toggle Button -->
+                        <button class="button-toggle-menu">
+                            <i class="fas fa-bars"></i>
+                        </button>
+
+                        <!-- Horizontal Menu Toggle Button -->
+                        <button class="navbar-toggle" data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
+                            <div class="lines">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </button>
+
+                        <!-- Topbar Search Form -->
+                        <div class="app-search dropdown d-none d-lg-block">
+                            <form>
+                                <div class="input-group">
+                                    <input type="search" class="form-control dropdown-toggle" placeholder="Search..." id="top-search">
+                                    <span class="fas fa-search search-icon"></span>
+                                    <button class="input-group-text btn btn-primary" type="submit">Search</button>
+                                </div>
+                            </form>
+                        
+                            <div class="dropdown-menu dropdown-menu-animated dropdown-lg" id="search-dropdown">
+                                <!-- item-->
+                                <div class="dropdown-header noti-title">
+                                    <h5 class="text-overflow mb-2">Found <span class="text-danger">17</span> results</h5>
+                                </div>
+                        
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="fas fa-file-alt me-1"></i>
+                                    <span>Analytics Report</span>
+                                </a>
+                        
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="fas fa-life-ring me-1"></i>
+                                    <span>How can I help you?</span>
+                                </a>
+                        
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="fas fa-cog me-1"></i>
+                                    <span>User profile settings</span>
+                                </a>
+                        
+                                <!-- item-->
+                                <div class="dropdown-header noti-title">
+                                    <h6 class="text-overflow mb-2 text-uppercase">Users</h6>
+                                </div>
+                        
+                                <div class="notification-list">
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <div class="d-flex">
+                                            <img class="d-flex me-2 rounded-circle" src="{% static 'assets/images/users/avatar-2.jpg' %}" alt="Generic placeholder image" height="32">
+                                            <div class="w-100">
+                                                <h5 class="m-0 font-14">Erwin Brown</h5>
+                                                <span class="font-12 mb-0">UI Designer</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                        
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <div class="d-flex">
+                                            <img class="d-flex me-2 rounded-circle" src="{% static 'assets/images/users/avatar-5.jpg' %}" alt="Generic placeholder image" height="32">
+                                            <div class="w-100">
+                                                <h5 class="m-0 font-14">Jacob Deo</h5>
+                                                <span class="font-12 mb-0">Developer</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                                        
+                        <!-- Button trigger modal -->
+                     <!-- For large screens -->
+                    <div class="d-none d-lg-block dropdown"> <!-- Hide on smaller screens -->
+                        <button type="button" class="btn btn-primary topbar-menu d-flex align-items-center gap-3" data-bs-toggle="modal" data-bs-target="#addTeamModal">
+                            Add Teams
+                        </button>
+                    </div>
+             
+
+
+                    <ul class="topbar-menu d-flex align-items-center gap-3">
+
+                        <li class="d-block d-lg-none">
+                            <a class="nav-link dropdown-toggle arrow-none"  data-bs-toggle="modal" data-bs-target="#addTeamModal" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                                <span class="text-primary">Teams</span>
+                            </a>
+                        </li>
+                    
+
+
+                        <li class="dropdown">
+                            <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                               
+                                <img src="{% static 'dash-assets/images/flags/us.jpg' %}" alt="user-image" class="me-1" height="12"> 
+                                <span class="align-middle d-none d-lg-inline-block">English</span> <i class="fas fa-chevron-down d-none d-sm-inline-block align-middle"></i>
+                            </a>
+
+
+                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated">
+                            
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">
+                                    <img src="{% static 'dash-assets/images/flags/germany.jpg' %}" alt="user-image" class="me-1" height="12"> <span class="align-middle">German</span>
+                                </a>
+                            
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">
+                                    <img src="{% static 'dash-assets/images/flags/italy.jpg' %}" alt="user-image" class="me-1" height="12"> <span class="align-middle">Italian</span>
+                                </a>
+                            
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">
+                                    <img src="{% static 'dash-assets/images/flags/spain.jpg' %}" alt="user-image" class="me-1" height="12"> <span class="align-middle">Spanish</span>
+                                </a>
+                            
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">
+                                    <img src="{% static 'dash-assets/images/flags/russia.jpg' %}" alt="user-image" class="me-1" height="12"> <span class="align-middle">Russian</span>
+                                </a>
+                            
+                            </div>
+                        </li>
+
+
+                      
+                        
+
+                        <li class="dropdown notification-list"  data-bs-toggle="tooltip" data-bs-placement="left" title="notifications">
+                            <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                <i class="fas fa-bell font-15"></i>
+                                <span class="noti-icon-badge"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated dropdown-lg py-0">
+                                <div class="p-2 border-top-0 border-start-0 border-end-0 border-dashed border">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <h6 class="m-0 font-16 fw-semibold"> Notification</h6>
+                                        </div>
+                                        <div class="col-auto">
+                                            <a href="javascript: void(0);" class="text-dark text-decoration-underline">
+                                                <small>Clear All</small>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                        
+                                <div class="px-2" style="max-height: 300px;" data-simplebar>
+                        
+                                    <h5 class="text-muted font-13 fw-normal mt-2">Today</h5>
+                                    <!-- item-->
+                        
+                                    <a href="javascript:void(0);" class="dropdown-item p-0 notify-item card unread-noti shadow-none mb-2">
+                                        <div class="card-body">
+                                            <span class="float-end noti-close-btn text-muted"><i class="fas fa-times"></i></span>
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-shrink-0">
+                                                    <div class="notify-icon bg-primary">
+                                                        <i class="fas fa-comment-account-outline"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1 text-truncate ms-2">
+                                                    <h5 class="noti-item-title fw-semibold font-14">Datacorp <small class="fw-normal text-muted ms-1">1 min ago</small></h5>
+                                                    <small class="noti-item-subtitle text-muted">Caleb Flakelar commented on Admin</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                        
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item p-0 notify-item card read-noti shadow-none mb-2">
+                                        <div class="card-body">
+                                            <span class="float-end noti-close-btn text-muted"><i class="fas fa-times"></i></span>
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-shrink-0">
+                                                    <div class="notify-icon bg-info">
+                                                        <i class="fas fa-account-plus"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1 text-truncate ms-2">
+                                                    <h5 class="noti-item-title fw-semibold font-14">Admin <small class="fw-normal text-muted ms-1">1 hours ago</small></h5>
+                                                    <small class="noti-item-subtitle text-muted">New user registered</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                        
+                                    <h5 class="text-muted font-13 fw-normal mt-0">Yesterday</h5>
+                        
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item p-0 notify-item card read-noti shadow-none mb-2">
+                                        <div class="card-body">
+                                            <span class="float-end noti-close-btn text-muted"><i class="fas fa-times"></i></span>
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-shrink-0">
+                                                    <div class="notify-icon">
+                                                        <img src="assets/images/users/avatar-2.jpg" class="img-fluid rounded-circle" alt="" />
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1 text-truncate ms-2">
+                                                    <h5 class="noti-item-title fw-semibold font-14">Cristina Pride <small class="fw-normal text-muted ms-1">1 day ago</small></h5>
+                                                    <small class="noti-item-subtitle text-muted">Hi, How are you? What about our next meeting</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                        
+                                    <h5 class="text-muted font-13 fw-normal mt-0">30 Dec 2021</h5>
+                        
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item p-0 notify-item card read-noti shadow-none mb-2">
+                                        <div class="card-body">
+                                            <span class="float-end noti-close-btn text-muted"><i class="fas fa-times"></i></span>
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-shrink-0">
+                                                    <div class="notify-icon bg-primary">
+                                                        <i class="fas fa-comment-account-outline"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1 text-truncate ms-2">
+                                                    <h5 class="noti-item-title fw-semibold font-14">Datacorp</h5>
+                                                    <small class="noti-item-subtitle text-muted">Caleb Flakelar commented on Admin</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                        
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item p-0 notify-item card read-noti shadow-none mb-2">
+                                        <div class="card-body">
+                                            <span class="float-end noti-close-btn text-muted"><i class="fas fa-times"></i></span>
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-shrink-0">
+                                                    <div class="notify-icon">
+                                                        <img src="assets/images/users/avatar-4.jpg" class="img-fluid rounded-circle" alt="" />
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1 text-truncate ms-2">
+                                                    <h5 class="noti-item-title fw-semibold font-14">Karen Robinson</h5>
+                                                    <small class="noti-item-subtitle text-muted">Wow ! this admin looks good and awesome design</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                        
+                                    <div class="text-center">
+                                        <i class="fas fa-circle-notch fa-spin text-muted h3 mt-0"></i>
+                                    </div>
+                                </div>
+                        
+                                <!-- All-->
+                                <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item border-top py-2">
+                                    View All
+                                </a>
+                        
+                            </div>
+                        </li>
+                        
+
+                        
+
+                        <li class="d-none d-sm-inline-block" data-bs-toggle="tooltip" data-bs-placement="left" title="Settings">
+                            <a class="nav-link" data-bs-toggle="offcanvas" href="#theme-settings-offcanvas" >
+                                <i class="fas fa-cog font-15"></i>
+                            </a>
+                        </li>
+                        
+
+                        <li class="d-none d-sm-inline-block">
+                            <div class="nav-link" id="light-dark-mode" data-bs-toggle="tooltip" data-bs-placement="left" title="Theme Mode">
+                                <i class="fas fa-sun font-15"></i> <!-- Sun icon for light mode -->
+                                <i class="fas fa-moon font-15 d-none"></i> <!-- Moon icon for dark mode -->
+                            </div>
+                            
+                        </li>
+
+                        <script>
+
+                                                        // JavaScript to toggle between light and dark mode
+                            const lightDarkMode = document.getElementById('light-dark-mode');
+                            const sunIcon = lightDarkMode.querySelector('.fa-sun');
+                            const moonIcon = lightDarkMode.querySelector('.fa-moon');
+
+                            // Function to toggle theme mode
+                            function toggleThemeMode() {
+                                document.body.classList.toggle('dark-mode');
+
+                                // Toggle visibility of sun and moon icons
+                                sunIcon.classList.toggle('d-none');
+                                moonIcon.classList.toggle('d-none');
+                            }
+
+                            // Event listener to toggle theme mode on click
+                            lightDarkMode.addEventListener('click', toggleThemeMode);
+
+
+                        </script>
+                        
+
+
+                        <li class="d-none d-md-inline-block" data-bs-toggle="tooltip" data-bs-placement="left" title="fullscreen"  >
+                            <a class="nav-link" href="" data-toggle="fullscreen">
+                                <i class="fas fa-expand-arrows-alt font-15"></i>
+                            </a>
+                        </li>
+                        
+                        <li class="dropdown">
+                            <a class="nav-link dropdown-toggle arrow-none nav-user px-2 " data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                               <i class="fa fa-user-circle" aria-hidden="true"></i>
+                                <span class="d-lg-flex flex-column gap-1 d-none">
+                                    <h5 class="my-0" style="font-size: 14px; font-family: 'Arial', sans-serif;">{{request.user.username}}</h5>
+                                    <h6 class="my-0 fw-normal" style="font-size: 12px; font-family: 'Arial', sans-serif;">{{request.user.last_login}}</h6>
+                                </span>
+                                
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated profile-dropdown">
+                                <!-- item-->
+                                <div class="dropdown-header noti-title">
+                                    <h6 class="text-overflow m-0">Welcome! {{request.user.first_name}}</h6>
+                                </div>
+                        
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">
+                                    <i class="fas fa-user-circle me-1"></i>
+                                    <span>My Account</span>
+                                </a>
+                        
+                                <!-- item-->
+                                <a href="#" class="dropdown-item" id="settingsLink">
+                                    <i class="fa fa-credit-card" aria-hidden="true"></i>
+                                    <span> Add Debit card </span>
+                                </a>
+                        
+                      
+                                <!-- item-->
+                                <a href="{% url 'account:logout' %}" class="dropdown-item">
+                                    <i class="fas fa-sign-out-alt me-1"></i>
+                                    <span>Logout</span>
+                                </a>
+                            
+                
+                            </div>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+            <!-- ========== Topbar End ========== -->
+
+            <!-- ========== Left Sidebar Start ========== -->
+            <div class="leftside-menu" >
+                <span class="position-absolute top-0 start-0 w-100 h-100 " id="particles-js"></span>
+                <!-- Brand Logo Light -->
+                <a href="index.html" class="logo logo-light">
+                  
+                      
+                    
+                    <span class="logo-sm">
+                        <a href="{%url 'core:home'%}" class="navbar-brand pe-3">
+                            <img
+                              src="{% static 'assets/img/maven_logo2.png' %}"
+                              width="70"
+                              alt="Ticketmaven"
+                            />
+                           
+                          </a>
+                    </span>
+                </a>
+
+                <!-- Brand Logo Dark -->
+                
+                <!-- Sidebar Hover Menu Toggle Button -->
+                <div class="button-sm-hover" data-bs-toggle="tooltip" data-bs-placement="right" title="Show Full Sidebar">
+                    <i class="ri-checkbox-blank-circle-line align-middle"></i>
+                </div>
+
+                <!-- Full Sidebar Menu Close Button -->
+                <div class="button-close-fullsidebar">
+                    <i class="fas fa-times align-middle"></i>
+
+                </div>
+
+                <!-- Sidebar -left -->
+                <div class="h-100" id="leftside-menu-container" data-simplebar>
+                    <!-- Leftbar User -->
+                    <div>
+                        <div class="leftbar-user bg-light shadow-sm">
+                            <a href="#">
+                                <i class="fa fa-user-circle" aria-hidden="true"></i>
+                                <span class="leftbar-user-name mt-2">{{request.user.first_name}}</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    
+                    
+                
+                    <!--- Sidemenu -->
+                    <ul class="side-nav">
+
+                        <li class="side-nav-title">Navigation</li>
+
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarDashboards" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                                <i class="fas fa-code"></i>
+                                
+                                <span class="badge bg-success float-end">5</span>
+                                <span> API </span>
+                            </a>
+                            
+                            <div class="collapse" id="sidebarDashboards">
+                                <ul class="side-nav-second-level">
+                                    <li>
+                                        <a href="dashboard-analytics.html">Analytics</a>
+                                    </li>
+                                    <li>
+                                        <a href="index.html">Ecommerce</a>
+                                    </li>
+                                    <li>
+                                        <a href="dashboard-projects.html">Projects</a>
+                                    </li>
+                                    <li>
+                                        <a href="dashboard-crm.html">CRM</a>
+                                    </li>
+                                    <li>
+                                        <a href="dashboard-wallet.html">E-Wallet</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        
+
+
+                                            <!-- Help Box -->
+                        <div class="help-box text-white text-center">
+                            <a href="javascript: void(0);" class="float-end close-btn text-white">
+                                <i class="mdi mdi-close"></i>
+                            </a>
+                            <img src="{% static 'dash-assets/images/svg/help-icon.svg'%}" height="90" alt="Helper Icon Image" />
+                            <h5 class="mt-3">Ticket Purchasing Bot Tip</h5>
+                            <p class="mb-3">Automate your ticket purchasing process with our Ticket Purchasing Bot! Set up your favorite teams and let the bot handle the rest.</p>
+                            <a href="javascript: void(0);" class="btn btn-secondary btn-sm">Explore</a>
+                        </div>
+                        <!-- end Help Box -->
+
+
+
+                    </ul>
+                    <!--- End Sidemenu -->
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <!-- ========== Left Sidebar End ========== -->
+
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+
+            <div class="content-page">
+                <div class="content">
+
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">                                    
+                                    <div class="page-title-right">
+                                        <form class="d-flex">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control form-control-light" id="dash-daterange">
+                                                <span class="input-group-text bg-primary border-primary text-white">
+                                                    <i class="fas fa-calendar-alt"></i>
+                                                </span>
+                                            </div>
+                                            <a href="javascript:void(0);" class="btn btn-primary ms-2">
+                                                <i class="fas fa-sync-alt"></i>
+                                            </a>
+                                            <a href="javascript:void(0);" class="btn btn-primary ms-1">
+                                                <i class="fas fa-filter"></i>
+                                            </a>
+                                        </form>
+                                        
+                                    </div>
+                                    <h4 class="page-title">Dashboard</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xl-5 col-lg-6">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="card widget-flat">
+                                            
+
+                                            <h4 class="header-title  px-3 mt-3"> Teams</h4>
+
+                                            <div id="teamsStatus" class="px-3 mt-1"></div>
+
+                                            <div class="float-end px-3 mt-3">
+                                                <i class="fas fa-ticket-alt widget-icon"></i>
+                                            </div>
+                                            
+                                            
+                                            <div class="card-body Teams" data-simplebar style="max-height: 403px;">
+                                                
+                                               
+                                                {% for team in teams %}
+                                                <div class="form-check form-switch mb-3 d-flex align-items-center team_{{ team.pk }}">
+                                                    <div class="col">
+                                                        <input class="form-check-input team-check me-3" type="checkbox" id="{{ team.name|slugify }}Toggle" {% if team.is_automated %}checked{% endif %}>
+                                                        <label class="form-check-label me-3" for="{{ team.name|slugify }}Toggle">{{ team.name }}</label>
+                                                        <span class="dot me-3" style="background-color: {% if team.is_automated %}#03fc73{% else %}#fceb03{% endif %};"></span>
+                                                    </div>
+                                                    <div class="col-auto ms-auto">
+                                                        <button type="button" class="btn btn-primary topbar-menu edit-icon me-3" data-bs-toggle="modal" data-bs-target="#teamEditModal" data-ticket-num="{{ team.tickets }}" data-team-name="{{ team.name }}" data-team-id="{{ team.id }}" data-team-username="{{team.username}}" data-team-password="{{team.password}}">
+                                                            <i class="fas fa-cog"></i> <!-- Font Awesome cog icon -->
+                                                        </button>
+                                                        <button type="button" class="btn btn-danger remove-icon" data-team-name="{{ team.name }}"  data-team-name="{{ team.name }}" data-team-id="{{ team.pk }}">
+                                                            <i class="fas fa-trash-alt"></i> <!-- Font Awesome trash icon -->
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+
+
+                                            </div> <!-- end card-body-->
+                                            
+                                            
+                                            
+                                        </div> <!-- end card-->
+                                    </div> <!-- end col-->
+                            
+                                    
+                                </div> <!-- end row -->
+                            </div> <!-- end col -->
+                            
+
+                            <div class="col-xl-7 col-lg-6">
+                                <div class="card card-h-100">
+                                    <div class="d-flex card-header justify-content-between align-items-center">
+                                        <h4 class="header-title"> Ticket Purchase Analytics</h4>
+                                        <div class="dropdown">
+                                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <!-- item-->
+                                                <a href="javascript:void(0);" class="dropdown-item">View Ticket Purchase Report</a>
+                                                <!-- item-->
+                                                <a href="javascript:void(0);" class="dropdown-item">Export Ticket Purchase Report</a>
+                                                <!-- item-->
+                                                <a href="javascript:void(0);" class="dropdown-item">View Profit from Ticket Sales</a>
+                                                <!-- item-->
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body pt-0">
+                                        <div dir="ltr">
+                                            <div id="high-performing-product" class="apex-charts" data-colors="#727cf5,#91a6bd40"></div>
+                                        </div>
+                                    </div> <!-- end card-body-->
+                                </div> <!-- end card-->
+                                
+
+                            </div> <!-- end col -->
+                        </div>
+                        <!-- end row -->
+
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="card">
+                                    <div class="d-flex card-header justify-content-between align-items-center">
+                                        <h4 class="header-title">Card Spending</h4>
+                                        <i class="fab fa-cc-visa"></i>
+                                        <div class="dropdown">
+                                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fas fa-caret-down"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <!-- item-->
+                                                <a href="javascript:void(0);" class="dropdown-item">Visa</a>
+                                                <!-- item-->
+                                                <a href="javascript:void(0);" class="dropdown-item">MasterCard</a>
+                                                <!-- item-->
+                                                <a href="javascript:void(0);" class="dropdown-item">American Express</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body pt-0">
+                                        <div class="chart-content-bg">
+                                            <div class="row text-center">
+                                                <div class="col-sm-6">
+                                                    <p class="text-muted mb-0 mt-3" style="font-family: 'Arial', sans-serif; font-size: 14px;">Card Ending Numbers</p>
+                                                    <h2 class="fw-normal mb-3 debit-card" style="font-family: 'Arial', sans-serif; font-size: 18px;">
+                                                        <small class="fas fa-circle text-primary align-middle me-1"></small>
+                                                        <span style="font-family: 'Arial', sans-serif;">
+                                                            {% if user.userprofile.credit_card_number %}
+                                                                XXXX XXXX XXXX {{ user.userprofile.credit_card_number|slice:"-4:" }}
+                                                            {% else %}
+                                                                No credit card added
+                                                            {% endif %}
+                                                        </span>
+                                                    </h2>
+                                                </div>
+                                                
+                                                <div class="col-sm-6">
+                                                    <p class="text-muted mb-0 mt-3" style="font-family: 'Arial', sans-serif; font-size: 14px;">Today's Spending</p>
+                                                    <h2 class="fw-normal mb-3" style="font-family: 'Arial', sans-serif; font-size: 18px;">
+                                                        <small class="fas fa-circle text-primary align-middle me-1"></small>
+                                                        <span style="font-family: 'Arial', sans-serif;">$1,000</span> <!-- Replace $2,562.30 with actual spending -->
+                                                    </h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        <div dir="ltr">
+                                            <div id="revenue-chart" class="apex-charts mt-3" data-colors="#727cf5,#0acf97"></div>
+                                        </div>
+                                    </div> <!-- end card-body-->
+                                </div> <!-- end card-->
+                            </div> <!-- end col-->
+                            
+
+                            <div class="col-lg-4">
+                                <div class="card">
+                                    <div class="d-flex card-header justify-content-between align-items-center">
+                                        <h4 class="header-title">Proxy Requests Locations</h4>
+                                        <div class="dropdown">
+                                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <!-- Add your SAAS-specific options here -->
+                                                <a href="javascript:void(0);" class="dropdown-item">View All Proxies</a>
+                                                <a href="javascript:void(0);" class="dropdown-item">Export Proxies</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+
+                                    <div class="card-body pt-0">
+                                        <div class="mb-4 mt-3">
+                                            <div id="world-map-markers" style="height: 217px"></div>
+                                        </div>
+
+                                        <h5 class="mb-1 mt-0 fw-normal">New York</h5>
+                                        <div class="progress-w-percent">
+                                            <span class="progress-value fw-bold">72</span>
+                                            <div class="progress progress-sm">
+                                                <div class="progress-bar" role="progressbar" style="width: 72%;" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+
+                                        <h5 class="mb-1 mt-0 fw-normal">San Francisco</h5>
+                                        <div class="progress-w-percent">
+                                            <span class="progress-value fw-bold">39 </span>
+                                            <div class="progress progress-sm">
+                                                <div class="progress-bar" role="progressbar" style="width: 39%;" aria-valuenow="39" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+
+                                        <h5 class="mb-1 mt-0 fw-normal">Sydney</h5>
+                                        <div class="progress-w-percent">
+                                            <span class="progress-value fw-bold">25 </span>
+                                            <div class="progress progress-sm">
+                                                <div class="progress-bar" role="progressbar" style="width: 39%;" aria-valuenow="39" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+
+                                        <h5 class="mb-1 mt-0 fw-normal">Singapore</h5>
+                                        <div class="progress-w-percent mb-0">
+                                            <span class="progress-value fw-bold">61</span>
+                                            <div class="progress progress-sm">
+                                                <div class="progress-bar" role="progressbar" style="width: 61%;" aria-valuenow="61" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                    </div> <!-- end card-body-->
+                                </div> <!-- end card-->
+                            </div> <!-- end col-->
+                        </div>
+                        <!-- end row -->
+
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-12 order-lg-2 order-xl-1">
+                                <div class="card">
+                                    <div class="d-flex card-header justify-content-between align-items-center">
+                                        <h4 class="header-title">Tickets Purchased</h4>
+                                        <div class="dropdown">
+                                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <!-- Add your SAAS-specific options here -->
+                                                <a href="javascript:void(0);" class="dropdown-item">View All Tickets</a>
+                                                <a href="javascript:void(0);" class="dropdown-item">Export Tickets</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                    <div class="card-body pt-0" data-simplebar style="max-height: 403px;">
+                                        <div class="table-responsive">
+                                            <table class="table table-centered table-nowrap table-hover mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Team</th>
+                                                        <th>Date</th>
+                                                        <th>Price</th>
+                                                        <th>Quantity</th>
+                                                        <th>Amount</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for purchase in ticket_purchases %}
+                                                    <tr>
+                                                        <td>{{ purchase.team }}</td>
+                                                        <td>{{ purchase.date }}</td>
+                                                        <td>{{ purchase.price }}</td>
+                                                        <td>{{ purchase.quantity }}</td>
+                                                        <td>{{ purchase.amount }}</td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div> <!-- end table-responsive-->
+                                    </div> <!-- end card-body-->
+                                </div> <!-- end card-->
+                                
+                                
+                            </div> <!-- end col-->
+
+                            <div class="col-xl-3 col-lg-6 order-lg-1">
+                                <div class="card" >
+                                    <div class="d-flex card-header justify-content-between align-items-center">
+                                        <h4 class="header-title">Spending Limit</h4>
+                                        <div class="dropdown">
+                                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <!-- item-->
+                                                <a href="javascript:void(0);" class="dropdown-item">Sales Report</a>
+                                                <!-- item-->
+                                                <a href="javascript:void(0);" class="dropdown-item">Export Report</a>
+                                                <!-- item-->
+                                                <a href="javascript:void(0);" class="dropdown-item">Profit</a>
+                                                <!-- item-->
+                                                <a href="javascript:void(0);" class="dropdown-item">Action</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                    <div class="card-body pt-0" data-simplebar style="max-height: 403px;">
+                                        <div id="average-sales" class="apex-charts mb-4 mt-2" data-colors="#727cf5,#0acf97,#fa5c7c,#ffbc00"></div>
+                                
+                                        <div class="chart-widget-list">
+                                            <p>
+                                                <i class="fab fa-cc-visa text-primary"></i> Visa
+                                                <span class="float-end">$2000.00</span> <!-- Replace $2000.00 with actual spending limit -->
+                                            </p>
+                                            <p>
+                                                <i class="fab fa-cc-mastercard text-danger"></i> MasterCard
+                                                <span class="float-end">$2500.00</span> <!-- Replace $2500.00 with actual spending limit -->
+                                            </p>
+                                            <p>
+                                                <i class="fab fa-cc-amex text-success"></i> American Express
+                                                <span class="float-end">$3000.00</span> <!-- Replace $3000.00 with actual spending limit -->
+                                            </p>
+                                            <p class="mb-0">
+                                                <i class="fab fa-cc-discover text-warning"></i> Discover
+                                                <span class="float-end">$3500.00</span> <!-- Replace $3500.00 with actual spending limit -->
+                                            </p>
+                                        </div>
+                                        
+                                    </div> <!-- end card-body-->
+                                </div> <!-- end card-->
+                                
+                            </div> <!-- end col-->
+
+                            <div class="col-xl-3 col-lg-6 order-lg-1">
+                                <div class="card">
+                                    <div class="d-flex card-header justify-content-between align-items-center">
+                                        <h4 class="header-title">Recent Activity</h4>
+                                        <div class="dropdown">
+                                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <!-- Add your SAAS-specific options here -->
+                                                <a href="javascript:void(0);" class="dropdown-item">View Activity Log</a>
+                                                <a href="javascript:void(0);" class="dropdown-item">Export Activity</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body py-0 mb-3" data-simplebar style="max-height: 403px;"> 
+                                        <div class="timeline-alt py-0">
+                                            <!-- Replace the timeline items with your SAAS-specific activity -->
+                                            {% for activity in user_activity %}
+                                            <div class="timeline-item">
+                                                {% if activity.activity_type == 'Purchase' %}
+                                                <i class="fas fa-shopping-cart bg-info-lighten text-info timeline-icon"></i>
+                                                {% elif activity.activity_type == 'Acquisition' %}
+                                                <i class="fas fa-check-circle bg-primary-lighten text-primary timeline-icon"></i>
+                                                {% endif %}
+                                                <div class="timeline-item-info">
+                                                    <a href="javascript:void(0);" class="text-info fw-bold mb-1 d-block">{{ activity.activity_type }}</a>
+                                                    <small>{{ activity.description }}</small>
+                                                    <p class="mb-0 pb-2">
+                                                        <small class="text-muted">{{ activity.timestamp }}</small>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                            <!-- Add more timeline items as needed -->
+                                        </div>
+                                        <!-- end timeline -->
+                                    </div> <!-- end slimscroll -->
+                                </div>
+                                
+                                
+                                <!-- end card-->
+                            </div>
+                            <!-- end col -->
+
+                        </div>
+                        <!-- end row -->
+
+                    </div>
+                    <!-- container -->
+
+                </div>
+                <!-- content -->
+
+                <!-- Footer Start -->
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <script>document.write(new Date().getFullYear())</script> © Ticketmaven 
+                            </div>
+                            <div class="col-md-6">
+                                <div class="text-md-end footer-links d-none d-md-block">
+                                    <a href="javascript: void(0);">About</a>
+                                    <a href="javascript: void(0);">Support</a>
+                                    <a href="javascript: void(0);">Contact Us</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+                <!-- end Footer -->
+
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+        </div>
+        <!-- END wrapper -->
+
+        <!-- Theme Settings -->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="theme-settings-offcanvas">
+            <div class="d-flex align-items-center bg-primary p-3 offcanvas-header">
+                <h5 class="text-white m-0">Settings</h5>
+                <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+
+            <div class="offcanvas-body p-0">
+                <div data-simplebar class="h-100">
+                    <div class="card mb-0 p-3">
+
+                        
+
+                        <h5 class="my-3 font-16 fw-bold">Color Scheme</h5>
+
+                        <div class="colorscheme-cardradio">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-check card-radio">
+                                        <input class="form-check-input" type="radio" name="data-bs-theme" id="layout-color-light" value="light">
+                                        <label class="form-check-label p-0 avatar-md w-100" for="layout-color-light">
+                                            
+                                            <div id="sidebar-size">
+                                                <span class="d-flex h-100">
+                                                    <span class="flex-shrink-0">
+                                                        <span class="bg-light d-flex h-100 border-end flex-column p-1 px-2">
+                                                            <span class="d-block p-1 bg-dark-lighten rounded mb-1"></span>
+                                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                        </span>
+                                                    </span>
+                                                    <span class="flex-grow-1">
+                                                        <span class="d-flex h-100 flex-column bg-white rounded-2">
+                                                            <span class="bg-light d-block p-1"></span>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </div>
+
+                                            <div id="topnav-color" class="bg-white rounded-2 h-100">
+                                                <span class="d-flex h-100 flex-column">
+                                                    <span class="bg-light d-flex p-1 align-items-center border-bottom border-secondary border-opacity-25">
+                                                        <span class="d-block p-1 bg-dark-lighten rounded me-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-auto"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-1"></span>
+                                                    </span>
+                                                    <span class="d-flex h-100 flex-column bg-white rounded-2">
+                                                        <span class="bg-light d-block p-1"></span>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <h5 class="font-14 text-center text-muted mt-2">Light</h5>
+                                </div>
+
+                                <div class="col-4">
+                                    <div class="form-check card-radio">
+                                        <input class="form-check-input" type="radio" name="data-bs-theme" id="layout-color-dark" value="dark">
+                                        <label class="form-check-label p-0 avatar-md w-100 bg-black" for="layout-color-dark">
+                                            <div id="sidebar-size">
+                                                <span class="d-flex h-100">
+                                                    <span class="flex-shrink-0">
+                                                        <span class="bg-light d-flex h-100 flex-column p-1 px-2">
+                                                            <span class="d-block p-1 bg-dark-lighten rounded mb-1"></span>
+                                                            <span class="d-block border border-secondary border-opacity-25 border-3 rounded w-100 mb-1"></span>
+                                                            <span class="d-block border border-secondary border-opacity-25 border-3 rounded w-100 mb-1"></span>
+                                                            <span class="d-block border border-secondary border-opacity-25 border-3 rounded w-100 mb-1"></span>
+                                                            <span class="d-block border border-secondary border-opacity-25 border-3 rounded w-100 mb-1"></span>
+                                                        </span>
+                                                    </span>
+                                                    <span class="flex-grow-1">
+                                                        <span class="d-flex h-100 flex-column">
+                                                            <span class="bg-light d-block p-1"></span>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </div>
+
+                                            <div id="topnav-color">
+                                                <span class="d-flex h-100 flex-column">
+                                                    <span class="bg-light-lighten d-flex p-1 align-items-center border-bottom border-opacity-25 border-primary border-opacity-25">
+                                                        <span class="d-block p-1 bg-dark-lighten rounded me-1"></span>
+                                                        <span class="d-block border border-primary border-opacity-25 border-3 rounded ms-auto"></span>
+                                                        <span class="d-block border border-primary border-opacity-25 border-3 rounded ms-1"></span>
+                                                        <span class="d-block border border-primary border-opacity-25 border-3 rounded ms-1"></span>
+                                                        <span class="d-block border border-primary border-opacity-25 border-3 rounded ms-1"></span>
+                                                    </span>
+                                                    <span class="bg-light-lighten d-block p-1"></span>
+                                                </span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <h5 class="font-14 text-center text-muted mt-2">Dark</h5>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="layout-width">
+                            <h5 class="my-3 font-16 fw-bold">Layout Mode</h5>
+
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-check card-radio">
+                                        <input class="form-check-input" type="radio" name="data-layout-mode" id="layout-mode-fluid" value="fluid">
+                                        <label class="form-check-label p-0 avatar-md w-100" for="layout-mode-fluid">
+                                            <div id="sidebar-size">
+                                                <span class="d-flex h-100">
+                                                    <span class="flex-shrink-0">
+                                                        <span class="bg-light d-flex h-100 border-end flex-column p-1 px-2">
+                                                            <span class="d-block p-1 bg-dark-lighten rounded mb-1"></span>
+                                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                        </span>
+                                                    </span>
+                                                    <span class="flex-grow-1">
+                                                        <span class="d-flex h-100 flex-column rounded-2">
+                                                            <span class="bg-light d-block p-1"></span>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </div>
+
+                                            <div id="topnav-color">
+                                                <span class="d-flex h-100 flex-column">
+                                                    <span class="bg-light d-flex p-1 align-items-center border-bottom border-secondary border-opacity-25">
+                                                        <span class="d-block p-1 bg-dark-lighten rounded me-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-auto"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-1"></span>
+                                                    </span>
+                                                    <span class="bg-light d-block p-1"></span>
+                                                </span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <h5 class="font-14 text-center text-muted mt-2">Fluid</h5>
+                                </div>
+                                <div class="col-4" id="layout-boxed">
+                                    <div class="form-check card-radio">
+                                        <input class="form-check-input" type="radio" name="data-layout-mode" id="layout-mode-boxed" value="boxed">
+                                        <label class="form-check-label p-0 avatar-md w-100 px-2" for="layout-mode-boxed">
+                                            <div id="sidebar-size" class="border-start border-end">
+                                                <span class="d-flex h-100">
+                                                    <span class="flex-shrink-0">
+                                                        <span class="bg-light d-flex h-100 border-end flex-column p-1 px-2">
+                                                            <span class="d-block p-1 bg-dark-lighten rounded mb-1"></span>
+                                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                        </span>
+                                                    </span>
+                                                    <span class="flex-grow-1">
+                                                        <span class="d-flex h-100 flex-column rounded-2">
+                                                            <span class="bg-light d-block p-1"></span>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </div>
+
+                                            <div id="topnav-color" class="border-start border-end h-100">
+                                                <span class="d-flex h-100 flex-column">
+                                                    <span class="bg-light d-flex p-1 align-items-center border-bottom border-secondary border-opacity-25">
+                                                        <span class="d-block p-1 bg-dark-lighten rounded me-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-auto"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-1"></span>
+                                                    </span>
+                                                    <span class="bg-light d-block p-1"></span>
+                                                </span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <h5 class="font-14 text-center text-muted mt-2">Boxed</h5>
+                                </div>
+
+                                <div class="col-4" id="layout-detached">
+                                    <div class="form-check sidebar-setting card-radio">
+                                        <input class="form-check-input" type="radio" name="data-layout-mode" id="data-layout-detached" value="detached">
+                                        <label class="form-check-label p-0 avatar-md w-100" for="data-layout-detached">
+                                            <span class="d-flex h-100 flex-column">
+                                                <span class="bg-light d-flex p-1 align-items-center border-bottom ">
+                                                    <span class="d-block p-1 bg-dark-lighten rounded me-1"></span>
+                                                    <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-auto"></span>
+                                                    <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-1"></span>
+                                                    <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-1"></span>
+                                                    <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-1"></span>
+                                                </span>
+                                                <span class="d-flex h-100 p-1 px-2">
+                                                    <span class="flex-shrink-0">
+                                                        <span class="bg-light d-flex h-100 flex-column p-1 px-2">
+                                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100"></span>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                                <span class="bg-light d-block p-1 mt-auto px-2"></span>
+                                            </span>
+
+                                        </label>
+                                    </div>
+                                    <h5 class="font-14 text-center text-muted mt-2">Detached</h5>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h5 class="my-3 font-16 fw-bold">Topbar Color</h5>
+
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-check card-radio">
+                                    <input class="form-check-input" type="radio" name="data-topbar-color" id="topbar-color-light" value="light">
+                                    <label class="form-check-label p-0 avatar-md w-100" for="topbar-color-light">
+                                        <div id="sidebar-size">
+                                            <span class="d-flex h-100">
+                                                <span class="flex-shrink-0">
+                                                    <span class="bg-light d-flex h-100 border-end  flex-column p-1 px-2">
+                                                        <span class="d-block p-1 bg-dark-lighten rounded mb-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                    </span>
+                                                </span>
+                                                <span class="flex-grow-1">
+                                                    <span class="d-flex h-100 flex-column">
+                                                        <span class="bg-light d-block p-1"></span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </div>
+
+                                        <div id="topnav-color">
+                                            <span class="d-flex h-100 flex-column">
+                                                <span class="bg-light d-flex p-1 align-items-center border-bottom border-secondary border-opacity-25">
+                                                    <span class="d-block p-1 bg-dark-lighten rounded me-1"></span>
+                                                    <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-auto"></span>
+                                                    <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-1"></span>
+                                                    <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-1"></span>
+                                                    <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-1"></span>
+                                                </span>
+                                                <span class="bg-light d-block p-1"></span>
+                                            </span>
+                                        </div>
+                                    </label>
+                                </div>
+                                <h5 class="font-14 text-center text-muted mt-2">Light</h5>
+                            </div>
+
+                            <div class="col-4" style="--ct-dark-rgb: 64,73,84;">
+                                <div class="form-check card-radio">
+                                    <input class="form-check-input" type="radio" name="data-topbar-color" id="topbar-color-dark" value="dark">
+                                    <label class="form-check-label p-0 avatar-md w-100" for="topbar-color-dark">
+                                        <div id="sidebar-size">
+                                            <span class="d-flex h-100">
+                                                <span class="flex-shrink-0">
+                                                    <span class="bg-light d-flex h-100 border-end  flex-column p-1 px-2">
+                                                        <span class="d-block p-1 bg-primary-lighten rounded mb-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                    </span>
+                                                </span>
+                                                <span class="flex-grow-1">
+                                                    <span class="d-flex h-100 flex-column">
+                                                        <span class="bg-dark d-block p-1"></span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </div>
+
+                                        <div id="topnav-color">
+                                            <span class="d-flex h-100 flex-column">
+                                                <span class="bg-dark d-flex p-1 align-items-center border-bottom border-secondary border-opacity-25">
+                                                    <span class="d-block p-1 bg-primary-lighten rounded me-1"></span>
+                                                    <span class="d-block border border-primary border-opacity-25 border-3 rounded ms-auto"></span>
+                                                    <span class="d-block border border-primary border-opacity-25 border-3 rounded ms-1"></span>
+                                                    <span class="d-block border border-primary border-opacity-25 border-3 rounded ms-1"></span>
+                                                    <span class="d-block border border-primary border-opacity-25 border-3 rounded ms-1"></span>
+                                                </span>
+                                                <span class="bg-light d-block p-1"></span>
+                                            </span>
+                                        </div>
+                                    </label>
+                                </div>
+                                <h5 class="font-14 text-center text-muted mt-2">Dark</h5>
+                            </div>
+
+                            <div class="col-4">
+                                <div class="form-check card-radio">
+                                    <input class="form-check-input" type="radio" name="data-topbar-color" id="topbar-color-brand" value="brand">
+                                    <label class="form-check-label p-0 avatar-md w-100" for="topbar-color-brand">
+                                        <div id="sidebar-size">
+                                            <span class="d-flex h-100">
+                                                <span class="flex-shrink-0">
+                                                    <span class="bg-light d-flex h-100 border-end  flex-column p-1 px-2">
+                                                        <span class="d-block p-1 bg-dark-lighten rounded mb-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                    </span>
+                                                </span>
+                                                <span class="flex-grow-1">
+                                                    <span class="d-flex h-100 flex-column">
+                                                        <span class="bg-primary bg-gradient d-block p-1"></span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </div>
+
+                                        <div id="topnav-color">
+                                            <span class="d-flex h-100 flex-column">
+                                                <span class="bg-primary bg-gradient d-flex p-1 align-items-center border-bottom border-secondary border-opacity-25">
+                                                    <span class="d-block p-1 bg-light opacity-25 rounded me-1"></span>
+                                                    <span class="d-block border border-3 border opacity-25 rounded ms-auto"></span>
+                                                    <span class="d-block border border-3 border opacity-25 rounded ms-1"></span>
+                                                    <span class="d-block border border-3 border opacity-25 rounded ms-1"></span>
+                                                    <span class="d-block border border-3 border opacity-25 rounded ms-1"></span>
+                                                </span>
+                                                <span class="bg-light d-block p-1"></span>
+                                            </span>
+                                        </div>
+                                    </label>
+                                </div>
+                                <h5 class="font-14 text-center text-muted mt-2">Brand</h5>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h5 class="my-3 font-16 fw-bold">Menu Color</h5>
+
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-check sidebar-setting card-radio">
+                                        <input class="form-check-input" type="radio" name="data-menu-color" id="leftbar-color-light" value="light">
+                                        <label class="form-check-label p-0 avatar-md w-100" for="leftbar-color-light">
+                                            <div id="sidebar-size">
+                                                <span class="d-flex h-100">
+                                                    <span class="flex-shrink-0">
+                                                        <span class="bg-light d-flex h-100 border-end  flex-column p-1 px-2">
+                                                            <span class="d-block p-1 bg-dark-lighten rounded mb-1"></span>
+                                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                        </span>
+                                                    </span>
+                                                    <span class="flex-grow-1">
+                                                        <span class="d-flex h-100 flex-column">
+                                                            <span class="bg-light d-block p-1"></span>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </div>
+
+                                            <div id="topnav-color">
+                                                <span class="d-flex h-100 flex-column">
+                                                    <span class="bg-light d-flex p-1 align-items-center border-bottom border-secondary border-opacity-25">
+                                                        <span class="d-block p-1 bg-dark-lighten rounded me-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-auto"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-1"></span>
+                                                    </span>
+                                                    <span class="bg-light d-block p-1"></span>
+                                                </span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <h5 class="font-14 text-center text-muted mt-2">Light</h5>
+                                </div>
+
+                                <div class="col-4" style="--ct-dark-rgb: 64,73,84;">
+                                    <div class="form-check sidebar-setting card-radio">
+                                        <input class="form-check-input" type="radio" name="data-menu-color" id="leftbar-color-dark" value="dark">
+                                        <label class="form-check-label p-0 avatar-md w-100" for="leftbar-color-dark">
+                                            <div id="sidebar-size">
+                                                <span class="d-flex h-100">
+                                                    <span class="flex-shrink-0">
+                                                        <span class="bg-dark d-flex h-100 flex-column p-1 px-2">
+                                                            <span class="d-block p-1 bg-dark-lighten rounded mb-1"></span>
+                                                            <span class="d-block border border-secondary rounded border-opacity-25 border-3 w-100 mb-1"></span>
+                                                            <span class="d-block border border-secondary rounded border-opacity-25 border-3 w-100 mb-1"></span>
+                                                            <span class="d-block border border-secondary rounded border-opacity-25 border-3 w-100 mb-1"></span>
+                                                            <span class="d-block border border-secondary rounded border-opacity-25 border-3 w-100 mb-1"></span>
+                                                        </span>
+                                                    </span>
+                                                    <span class="flex-grow-1">
+                                                        <span class="d-flex h-100 flex-column">
+                                                            <span class="bg-light d-block p-1"></span>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </div>
+
+                                            <div id="topnav-color">
+                                                <span class="d-flex h-100 flex-column">
+                                                    <span class="bg-light d-flex p-1 align-items-center border-bottom border-secondary border-primary border-opacity-25">
+                                                        <span class="d-block p-1 bg-primary-lighten rounded me-1"></span>
+                                                        <span class="d-block border border-secondary rounded border-opacity-25 border-3 ms-auto"></span>
+                                                        <span class="d-block border border-secondary rounded border-opacity-25 border-3 ms-1"></span>
+                                                        <span class="d-block border border-secondary rounded border-opacity-25 border-3 ms-1"></span>
+                                                        <span class="d-block border border-secondary rounded border-opacity-25 border-3 ms-1"></span>
+                                                    </span>
+                                                    <span class="bg-dark d-block p-1"></span>
+                                                </span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <h5 class="font-14 text-center text-muted mt-2">Dark</h5>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-check sidebar-setting card-radio">
+                                        <input class="form-check-input" type="radio" name="data-menu-color" id="leftbar-color-brand" value="brand">
+                                        <label class="form-check-label p-0 avatar-md w-100" for="leftbar-color-brand">
+                                            <div id="sidebar-size">
+                                                <span class="d-flex h-100">
+                                                    <span class="flex-shrink-0">
+                                                        <span class="bg-primary bg-gradient d-flex h-100 flex-column p-1 px-2">
+                                                            <span class="d-block p-1 bg-light-lighten rounded mb-1"></span>
+                                                            <span class="d-block border opacity-25 rounded border-3 w-100 mb-1"></span>
+                                                            <span class="d-block border opacity-25 rounded border-3 w-100 mb-1"></span>
+                                                            <span class="d-block border opacity-25 rounded border-3 w-100 mb-1"></span>
+                                                            <span class="d-block border opacity-25 rounded border-3 w-100 mb-1"></span>
+                                                        </span>
+                                                    </span>
+                                                    <span class="flex-grow-1">
+                                                        <span class="d-flex h-100 flex-column">
+                                                            <span class="bg-light d-block p-1"></span>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </div>
+
+                                            <div id="topnav-color">
+                                                <span class="d-flex h-100 flex-column">
+                                                    <span class="bg-light d-flex p-1 align-items-center border-bottom border-secondary">
+                                                        <span class="d-block p-1 bg-dark-lighten rounded me-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-auto"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-1"></span>
+                                                    </span>
+                                                    <span class="bg-primary bg-gradient d-block p-1"></span>
+                                                </span>
+                                            </div>
+
+                                        </label>
+                                    </div>
+                                    <h5 class="font-14 text-center text-muted mt-2">Brand</h5>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="sidebar-size">
+                            <h5 class="my-3 font-16 fw-bold">Sidebar Size</h5>
+
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-check sidebar-setting card-radio">
+                                        <input class="form-check-input" type="radio" name="data-sidenav-size" id="leftbar-size-default" value="default">
+                                        <label class="form-check-label p-0 avatar-md w-100" for="leftbar-size-default">
+                                            <span class="d-flex h-100">
+                                                <span class="flex-shrink-0">
+                                                    <span class="bg-light d-flex h-100 border-end  flex-column p-1 px-2">
+                                                        <span class="d-block p-1 bg-dark-lighten rounded mb-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                    </span>
+                                                </span>
+                                                <span class="flex-grow-1">
+                                                    <span class="d-flex h-100 flex-column">
+                                                        <span class="bg-light d-block p-1"></span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <h5 class="font-14 text-center text-muted mt-2">Default</h5>
+                                </div>
+
+                                <div class="col-4">
+                                    <div class="form-check sidebar-setting card-radio">
+                                        <input class="form-check-input" type="radio" name="data-sidenav-size" id="leftbar-size-compact" value="compact">
+                                        <label class="form-check-label p-0 avatar-md w-100" for="leftbar-size-compact">
+                                            <span class="d-flex h-100">
+                                                <span class="flex-shrink-0">
+                                                    <span class="bg-light d-flex h-100 border-end  flex-column p-1">
+                                                        <span class="d-block p-1 bg-dark-lighten rounded mb-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                    </span>
+                                                </span>
+                                                <span class="flex-grow-1">
+                                                    <span class="d-flex h-100 flex-column">
+                                                        <span class="bg-light d-block p-1"></span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <h5 class="font-14 text-center text-muted mt-2">Compact</h5>
+                                </div>
+
+                                <div class="col-4">
+                                    <div class="form-check sidebar-setting card-radio">
+                                        <input class="form-check-input" type="radio" name="data-sidenav-size" id="leftbar-size-small" value="condensed">
+                                        <label class="form-check-label p-0 avatar-md w-100" for="leftbar-size-small">
+                                            <span class="d-flex h-100">
+                                                <span class="flex-shrink-0">
+                                                    <span class="bg-light d-flex h-100 border-end flex-column" style="padding: 2px;">
+                                                        <span class="d-block p-1 bg-dark-lighten rounded mb-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                    </span>
+                                                </span>
+                                                <span class="flex-grow-1">
+                                                    <span class="d-flex h-100 flex-column">
+                                                        <span class="bg-light d-block p-1"></span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <h5 class="font-14 text-center text-muted mt-2">Condensed</h5>
+                                </div>
+
+                                <div class="col-4">
+                                    <div class="form-check sidebar-setting card-radio">
+                                        <input class="form-check-input" type="radio" name="data-sidenav-size" id="leftbar-size-small-hover" value="sm-hover">
+                                        <label class="form-check-label p-0 avatar-md w-100" for="leftbar-size-small-hover">
+                                            <span class="d-flex h-100">
+                                                <span class="flex-shrink-0">
+                                                    <span class="bg-light d-flex h-100 border-end flex-column" style="padding: 2px;">
+                                                        <span class="d-block p-1 bg-dark-lighten rounded mb-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                    </span>
+                                                </span>
+                                                <span class="flex-grow-1">
+                                                    <span class="d-flex h-100 flex-column">
+                                                        <span class="bg-light d-block p-1"></span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <h5 class="font-14 text-center text-muted mt-2">Hover View</h5>
+                                </div>
+
+                                <div class="col-4">
+                                    <div class="form-check sidebar-setting card-radio">
+                                        <input class="form-check-input" type="radio" name="data-sidenav-size" id="leftbar-size-full" value="full">
+                                        <label class="form-check-label p-0 avatar-md w-100" for="leftbar-size-full">
+                                            <span class="d-flex h-100">
+                                                <span class="flex-shrink-0">
+                                                    <span class="d-flex h-100 flex-column">
+                                                        <span class="d-block p-1 bg-dark-lighten mb-1"></span>
+                                                    </span>
+                                                </span>
+                                                <span class="flex-grow-1">
+                                                    <span class="d-flex h-100 flex-column">
+                                                        <span class="bg-light d-block p-1"></span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <h5 class="font-14 text-center text-muted mt-2">Full Layout</h5>
+                                </div>
+
+                                <div class="col-4">
+                                    <div class="form-check sidebar-setting card-radio">
+                                        <input class="form-check-input" type="radio" name="data-sidenav-size" id="leftbar-size-fullscreen" value="fullscreen">
+                                        <label class="form-check-label p-0 avatar-md w-100" for="leftbar-size-fullscreen">
+                                            <span class="d-flex h-100">
+                                                <span class="flex-grow-1">
+                                                    <span class="d-flex h-100 flex-column">
+                                                        <span class="bg-light d-block p-1"></span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <h5 class="font-14 text-center text-muted mt-2">Fullscreen Layout</h5>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="layout-position">
+                            <h5 class="my-3 font-16 fw-bold">Layout Position</h5>
+
+                            <div class="btn-group radio" role="group">
+                                <input type="radio" class="btn-check" name="data-layout-position" id="layout-position-fixed" value="fixed">
+                                <label class="btn btn-soft-primary w-sm" for="layout-position-fixed">Fixed</label>
+
+                                <input type="radio" class="btn-check" name="data-layout-position" id="layout-position-scrollable" value="scrollable">
+                                <label class="btn btn-soft-primary w-sm ms-0" for="layout-position-scrollable">Scrollable</label>
+                            </div>
+                        </div>
+
+                        <div id="sidebar-user">
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <label class="font-16 fw-bold m-0" for="sidebaruser-check">Sidebar User Info</label>
+                                <div class="form-check form-switch">
+                                    <input type="checkbox" class="form-check-input" name="sidebar-user" id="sidebaruser-check">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="offcanvas-footer border-top p-3 text-center">
+                <div class="row">
+                    <div class="col-6">
+                        <button type="button" class="btn btn-light w-100" id="reset-layout">Reset</button>
+                    </div>
+                    <div class="col-6">
+                        <a href="#"  role="button" class="btn btn-primary w-100">Apply</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+         <!-- Team Edit Modal -->
+
+         <div class="modal fade" id="teamEditModal" tabindex="-1" aria-labelledby="teamEditModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="teamEditModalLabel">Edit tickets Value for <span id="teamNamePlaceholder"></span></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Edit Status div -->
+                        <div id="edit-statusDiv" class="mb-3"></div>
+                        <!-- Slider input -->
+                        <div class="mb-3">
+                            <label for="sliderInput" class="form-label">Slider Value:</label>
+                            <input type="range" class="form-range" min="1" max="7000" value="1" id="sliderInput">
+                            <output id="sliderOutput">1</output>
+                        </div>
+                        <!-- Username input -->
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username:</label>
+                            <input type="text" class="form-control" id="username" placeholder="Enter username">
+                        </div>
+                        <!-- Password input -->
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password:</label>
+                            <input type="text" class="form-control" id="password" placeholder="Enter password">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="saveSliderBtn">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        
+        
+
+        <!-- Modal -->
+        <div class="modal fade" id="addTeamModal" tabindex="-1" aria-labelledby="addTeamModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="addTeamModalLabel">Add Team</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <!-- Status div -->
+                  <div id="statusDiv" class="mb-3"></div>
+                  <!-- Team selection -->
+                  <div class="mb-3">
+                    <label for="teamSelect" class="form-label">Select Team:</label>
+                    <select class="form-select" id="teamSelect">
+                      <option selected disabled>Select Team</option>
+                      <option value="Liverpool">Liverpool</option>
+                      <option value="Manchester United">Manchester United</option>
+                      <option value="Chelsea">Chelsea</option>
+                      <!-- Add more teams here -->
+                    </select>
+                  </div>
+                  <!-- Ticket slider -->
+                  <div class="mb-3">
+                    <label for="ticketSlider" class="form-label">Number of Tickets:</label>
+                    <input type="range" class="form-range" min="1" max="7000" value="1" id="ticketSlider">
+                    <output id="ticketOutput">1</output>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" id="addTeamBtn">Add Team</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Modal for credit card information -->
+<!-- Modal for credit card information -->
+<div class="modal fade" id="creditCardModal" tabindex="-1" aria-labelledby="creditCardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="creditCardModalLabel">Enter Credit Card Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="creditCardForm">
+                    <div class="mb-3">
+                        <label for="creditCardNumber" class="form-label">Credit Card Number</label>
+                        <input type="text" class="form-control" id="creditCardNumber" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cvv" class="form-label">CVV</label>
+                        <input type="text" class="form-control" id="cvv" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+          
+
+         
+
+        
+       <!-- Vendor js -->
+<script src="{% static 'dash-assets/js/vendor.min.js' %}"></script>
+
+<!-- Daterangepicker js -->
+<script src="{% static 'dash-assets/vendor/daterangepicker/moment.min.js' %}"></script>
+<script src="{% static 'dash-assets/vendor/daterangepicker/daterangepicker.js' %}"></script>
+
+<!-- Apex Charts js -->
+<script src="{% static 'dash-assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
+
+<!-- Vector Map js -->
+<script src="{% static 'dash-assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js' %}"></script>
+<script src="{% static 'dash-assets/vendor/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js' %}"></script>
+
+<!-- Dashboard App js -->
+<script src="{% static 'dash-assets/js/pages/demo.dashboard.js' %}"></script>
+
+<!-- App js -->
+<script src="{% static 'dash-assets/js/app.min.js' %}"></script>
+
+
+
+<script>
+    var particlesConfig = {
+        particles: {
+          number: {
+            value: 80,
+            density: {
+              enable: true,
+              value_area: 800
+            }
+          },
+          color: {
+            value: "4044ee"
+          },
+          shape: {
+            type: "circle",
+            stroke: {
+              width: 0,
+              color: "#000000"
+            },
+            polygon: {
+              nb_sides: 5
+            }
+          },
+          opacity: {
+            value: 0.5,
+            random: false,
+            anim: {
+              enable: false,
+              speed: 1,
+              opacity_min: 0.1,
+              sync: false
+            }
+          },
+          size: {
+            value: 3,
+            random: true,
+            anim: {
+              enable: false,
+              speed: 40,
+              size_min: 0.1,
+              sync: false
+            }
+          },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#ffffff",
+            opacity: 0.2,
+            width: 0.5
+          },
+          move: {
+            enable: true,
+            speed: 6,
+            direction: "none",
+            random: false,
+            straight: false,
+            out_mode: "out",
+            bounce: false,
+            attract: {
+              enable: false,
+              rotateX: 600,
+              rotateY: 1200
+            }
+          }
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: {
+              enable: true,
+              mode: "repulse"
+            },
+            onclick: {
+              enable: true,
+              mode: "push"
+            },
+            resize: true
+          },
+          modes: {
+            grab: {
+              distance: 400,
+              line_linked: {
+                opacity: 1
+              }
+            },
+            bubble: {
+              distance: 400,
+              size: 40,
+              duration: 2,
+              opacity: 8,
+              speed: 3
+            },
+            repulse: {
+              distance: 200,
+              duration: 0.4
+            },
+            push: {
+              particles_nb: 4
+            },
+            remove: {
+              particles_nb: 2
+            }
+          }
+        },
+        retina_detect: true
+      };
+
+
+      var DotparticlesConfig = {
+        particles: {
+          number: {
+            value: 80,
+            density: {
+              enable: true,
+              value_area: 800
+            }
+          },
+          color: {
+            value: "4044ee"
+          },
+          shape: {
+            type: "circle",
+            stroke: {
+              width: 0,
+              color: "#000000"
+            },
+            polygon: {
+              nb_sides: 5
+            }
+          },
+          opacity: {
+            value: 0.5,
+            random: false,
+            anim: {
+              enable: false,
+              speed: 1,
+              opacity_min: 0.1,
+              sync: false
+            }
+          },
+          size: {
+            value: 3,
+            random: true,
+            anim: {
+              enable: false,
+              speed: 40,
+              size_min: 0.1,
+              sync: false
+            }
+          },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#111212",
+            opacity: 0.0,
+            width: 1
+          },
+          move: {
+            enable: true,
+            speed: 6,
+            direction: "none",
+            random: false,
+            straight: false,
+            out_mode: "out",
+            bounce: false,
+            attract: {
+              enable: false,
+              rotateX: 600,
+              rotateY: 1200
+            }
+          }
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: {
+              enable: true,
+              mode: "repulse"
+            },
+            onclick: {
+              enable: true,
+              mode: "push"
+            },
+            resize: true
+          },
+          modes: {
+            grab: {
+              distance: 400,
+              line_linked: {
+                opacity: 1
+              }
+            },
+            bubble: {
+              distance: 400,
+              size: 40,
+              duration: 2,
+              opacity: 8,
+              speed: 3
+            },
+            repulse: {
+              distance: 200,
+              duration: 0.4
+            },
+            push: {
+              particles_nb: 4
+            },
+            remove: {
+              particles_nb: 2
+            }
+          }
+        },
+        retina_detect: true
+      };
+      
+
+    particlesJS("particles-js", particlesConfig);
+    particlesJS("dots-particles-js", DotparticlesConfig);
+
+            function setDotColor(dotElement, status) {
+                
+                if (status === "green") {
+                    
+                    $(dotElement).css("background-color", "#03fc73");
+                } else if (status === "yellow") {
+                   
+
+                    $(dotElement).css("background-color", "#fceb03");
+                } else if (status === "red") {
+                    $(dotElement).css("background-color", "#fc0345");
+                } else {
+                    $(dotElement).css("background-color", "#03fc73"); // Default color
+                }
+            }
+            
+        
+        
+            // Function to handle checkbox change event
+            $(document).on('change', '.team-check', function() {
+                var isChecked = $(this).prop('checked');
+                var dot = $(this).siblings('.dot');
+
+                var teamName = $(this).siblings('.form-check-label').text();
+                
+                // Determine whether to start or stop automation
+                var action = isChecked ? 'start' : 'stop';
+             
+                var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+                
+                // Make AJAX request to update automation status
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url 'dashboard:update_automation_status' %}',
+                    headers: { "X-CSRFToken": csrfToken }, 
+                    data: JSON.stringify({ 'team_name': teamName, 'action': action }), // Include action parameter
+                    contentType: 'application/json',
+                    success: function(response) {
+               
+
+                        if (response.success) {
+                            // Set dot color and update status message based on response
+                           
+                            if (isChecked) {
+                       
+                                setDotColor(dot, "green");
+                                $(".Teams").load(" .Teams > *");
+                                $('#teamsStatus').text('Automation started successfully for team: ' + response.team_name).removeClass('text-warning').addClass('text-success').fadeIn(100).fadeOut(3000);
+                            } else {
+                     
+                                setDotColor(dot, "yellow");
+                                $(".Teams").load(" .Teams > *");
+                                $('#teamsStatus').text('Automation stopped successfully for team: ' + response.team_name).removeClass('text-warning').addClass('text-warning').fadeIn(100).fadeOut(3000);
+                            }
+
+                        } else {
+                            // Display error message
+                            var errorMessage = isChecked ? 'Failed to start automation for team: ' : 'Failed to stop automation for team: ';
+                            $(".Teams").load(" .Teams > *");
+                            $('#teamsStatus').text(errorMessage + response.team_name).removeClass('text-success').addClass('text-danger').fadeIn(100).fadeOut(3000);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        // Display error message
+                        var errorMessage = isChecked ? 'Error: Failed to start automation. ' : 'Error: Failed to stop automation. ';
+                        $(".Teams").load(" .Teams > *");
+                        $('#teamsStatus').text(errorMessage + 'Please try again.').removeClass('text-success').addClass('text-danger').fadeIn(100).fadeOut(3000);
+                    }
+                });
+            });
+
+
+            
+            
+
+        // Update ticket output value based on slider value
+            $('#ticketSlider').on('input', function() {
+                $('#ticketOutput').text($(this).val());
+            });
+
+            $('#sliderInput').on('input', function() {
+                $('#sliderOutput').text($(this).val());
+            });
+  
+  
+
+  
+        // Handle add team button click
+        $('#addTeamBtn').on('click', function() {
+            var team = $('#teamSelect').val();
+            var tickets = $('#ticketSlider').val();
+        
+            // Prepare the data to send
+            var data = {
+                'name': team,
+                'tickets': tickets
+            };
+
+            var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+        
+            // Send the POST request
+            $.ajax({
+                type: 'POST',
+                headers: { "X-CSRFToken": csrfToken }, 
+                url: '{% url 'dashboard:add_team' %}', 
+                data: JSON.stringify(data),
+                contentType: 'application/json',
+
+                success: function(response) {
+                    // Check if the team was successfully added
+                    if (response.success) {
+                        // Create the HTML for the new team
+                        $(".Teams").load(" .Teams > *");
+                
+                        // Update status message with the response message
+                        $('#statusDiv').text(response.message).removeClass('text-danger').addClass('text-success');
+                          // Close modal
+
+                          setTimeout(function() {
+                            $('#addTeamModal').modal('hide');
+                  
+                          }, 1000); // 5000 milliseconds = 5 seconds
+
+                       
+                    } else {
+                        // Handle database addition failure
+                        console.log('Failed to add team to database.');
+                        // Update status message with the response message
+                        $('#statusDiv').text(response.message).removeClass('text-success').addClass('text-danger').fadeIn(100).fadeOut(2000);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // Handle error
+                    console.error('Error:', error);
+                    // Update status message with the error message
+                    $('#statusDiv').text('Error: ' +  xhr.responseJSON.message).removeClass('text-success').addClass('text-danger').fadeIn(100).fadeOut(2000);
+                }
+            });
+        });
+        
+
+        $(document).on('click', '.edit-icon', function() {
+            // Get the ticket number from the data attribute of the clicked button
+            var ticketNum = $(this).data('ticket-num');
+            
+            // Update the modal title with the clicked team's name
+            var teamName = $(this).data('team-name');
+
+            var teamuser=$(this).data('team-username')
+            var teampassword=$(this).data('team-password')
+
+            $('#teamEditModalLabel').text('Edit tickets Quantity Value for ' + teamName);
+            
+            // Set the value of the slider input to the ticket number
+            $('#sliderInput').val(ticketNum);
+            $('#sliderOutput').text(ticketNum); // Update the output element if needed
+
+            if(teamuser!="None"){
+                $('#username').val(teamuser)
+            }
+            else{
+                $('#username').val("")
+            }
+
+            if(teampassword!="None"){
+                $('#password').val(teampassword)
+            }
+            else{
+                $('#password').val("")
+            }
+            
+          
+        });
+        
+
+        $('#saveSliderBtn').on('click', function() {
+            // Get the team name from the modal title
+            var teamName = $('#teamEditModalLabel').text().trim().split("Edit tickets Quantity Value for ")[1];
+            
+            // Get the new slider value
+            var newSliderValue = $('#sliderInput').val();
+            
+            // Get the username and password
+            var username = $('#username').val();
+            var password = $('#password').val();
+            
+            var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+            
+            // Prepare the data to be sent in the AJAX request
+            var data = {
+                'team_name': teamName,
+                'new_slider_value': newSliderValue,
+                'username': username,
+                'password': password
+            };
+            
+            // Send a POST request to update the team's slider value
+            $.ajax({
+                type: 'POST',
+                headers: { "X-CSRFToken": csrfToken }, 
+                url: '{% url 'dashboard:update_team_slider' %}',
+                data: JSON.stringify(data),
+                contentType: 'application/json',
+                success: function(response) {
+                    // Handle the success response
+                    $('#edit-statusDiv').text('Slider value updated successfully').removeClass('text-danger').addClass('text-success').fadeIn(100).fadeOut(1000);
+                    console.log('Slider value updated successfully');
+                    // Optionally, you can update the UI to reflect the changes
+                    setTimeout(function() {
+                        $('#teamEditModal').modal('hide');
+                    }, 1000); // 5000 milliseconds = 5 seconds
+                    $(".Teams").load(" .Teams > *");
+                },
+                error: function(xhr, status, error) {
+                    // Handle the error response
+                    $('#edit-statusDiv').text('Error updating slider value: ' + xhr.responseJSON.message).removeClass('text-success').addClass('text-danger').fadeIn(100).fadeOut(1000);
+                    console.error('Error updating slider value:', error);
+                }
+            });
+        });
+        
+        
+    
+                $(document).on('click', '.remove-icon', function() {
+                    // Get the team name associated with the clicked remove button
+                // Get the team name associated with the clicked remove button
+                var teamName = $(this).data('team-name');
+
+                // Remove the team from the HTML div
+                var teamId = $(this).data("team-id");
+
+            
+
+
+                var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+                            // Perform deletion confirmation and AJAX call
+                            if (confirm('Are you sure you want to delete team ' + teamName + '?')) {
+                                // Send an AJAX request to delete the team
+                                $.ajax({
+                                    type: 'POST',
+                                    headers: { "X-CSRFToken": csrfToken }, // Make sure to include CSRF token
+                                    url: '{% url 'dashboard:delete_team' %}',
+                                    data: JSON.stringify({ 'team_name': teamName }),
+                                    contentType: 'application/json',
+                                    success: function(response) {
+                                        // Handle the success response
+                                        console.log('Team deleted successfully:', response.message);
+                                        
+                                        
+                                        $('.team_' + teamId).remove(); // Remove the team element from the DOM
+                                        
+                                        // Update status div
+                                        $('#teamsStatus').text('Team "' + teamName + '" deleted successfully.').removeClass('text-danger').addClass('text-success').fadeIn(100).fadeOut(1000);
+                                    },
+                                    error: function(xhr, status, error) {
+                                        // Handle the error response
+                                        console.error('Error deleting team:', error);
+                                        
+                                        // Update status div
+                                        $('#teamsStatus').text('Error deleting team: ' + xhr.responseJSON.message).removeClass('text-success').addClass('text-danger').fadeIn(100).fadeOut(1000);
+                                    }
+                                    
+                                });
+                            }
+                });
+
+
+                 // Add event listener to Settings link
+    document.getElementById('settingsLink').addEventListener('click', function() {
+        // Show the credit card modal
+        $('#creditCardModal').modal('show');
+    });
+
+
+    // Submit form when modal save button is clicked
+    $('#creditCardForm').submit(function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Get credit card information from form
+        var creditCardNumber = $('#creditCardNumber').val();
+        var cvv = $('#cvv').val();
+
+        // Prepare data to send to the server
+        var data = {
+            'credit_card_number': creditCardNumber,
+            'cvv': cvv
+        };
+        var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+
+        // Send AJAX request to Django view
+        $.ajax({
+            type: 'POST',
+            url: '{% url 'dashboard:store_credit_card' %}', // Replace with your Django view URL
+            data: JSON.stringify(data),
+            headers: { "X-CSRFToken": csrfToken },
+            contentType: 'application/json',
+            success: function(response) {
+                // Handle success response
+                alert('Credit card information saved successfully!');
+                $('#creditCardModal').modal('hide'); // Close the modal
+                
+                $(".debit-card").load(" .debit-card > *");
+            },
+            error: function(xhr, status, error) {
+                // Handle error response
+                alert('Failed to save credit card information. Please try again.');
+            }
+        });
+    });
+
+
+
+
+    
+
+
+</script>
+
+    </body>
+</html> 
