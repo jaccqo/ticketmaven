@@ -8,7 +8,7 @@ from django.db import IntegrityError
 import time
 import requests
 import threading
-from core.models import UserProfile,Activity,TicketPurchase
+from core.models import UserProfile,Activity,TeamsTicketPurchase
 
 
 @login_required(login_url='account:login')
@@ -25,7 +25,7 @@ def dashboard_view(request):
     # Retrieve user's activity
     if user_profile:
         user_activity = Activity.objects.filter(user_profile=user_profile)
-        ticket_purchases = TicketPurchase.objects.filter(user_profile=request.user.userprofile)
+        ticket_purchases = TeamsTicketPurchase.objects.filter(user_profile=request.user.userprofile)
     else:
         user_activity = None
 
@@ -177,18 +177,24 @@ def update_automation_status(request):
         return JsonResponse({'success': False, 'message': 'Invalid request method'}, status=400)
     
 
-
 def store_credit_card(request):
     data = json.loads(request.body)
     credit_card_number = data.get('credit_card_number')
     cvv = data.get('cvv')
+    expiry_date = data.get('expiry_date')
+    expiry_year = data.get('expiry_year')
+
+    print(credit_card_number)
 
     # Assuming the user is authenticated, get the UserProfile instance
-    user_profile = UserProfile.objects.get(user=request.user)
+    user_profile, created = UserProfile.objects.get_or_create(user=request.user)
 
     # Update the UserProfile with the credit card information
     user_profile.credit_card_number = credit_card_number
     user_profile.cvv = cvv
+    user_profile.expiry_date = expiry_date
+    user_profile.expiry_year = expiry_year
+
     user_profile.save()
 
     return JsonResponse({'success': True})

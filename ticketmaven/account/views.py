@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.urls import reverse
-
+from rest_framework.authtoken.models import Token
 
 # Create your views here.
 def login_view(request):
@@ -32,6 +32,8 @@ def authenticate_login(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
         remember = request.POST.get('remember')
+
+        
         
         if email and password:
             # Check if user exists in the database
@@ -58,6 +60,10 @@ def authenticate_login(request):
                     request.session.set_expiry(settings.SESSION_COOKIE_AGE_REMEMBER)
 
                 # Return success response
+                token, created = Token.objects.get_or_create(user=user)
+        
+                # Store the token in the session
+                request.session['auth_token'] = token.key
                 redirect_url = reverse('dashboard:dash')
                 return JsonResponse({'status': 'success', 'message': 'Login successful', 'redirect_url': redirect_url})
             else:

@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure--7n@z#ak9f$kadfyn4&@jhq7g0d3$c4z=eh19cgqi+u(1(_s(o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["45.79.209.122","ticketmaven.com"]
+ALLOWED_HOSTS = ["localhost","45.79.209.122","ticketmaven.com"]
 
 
 # Application definition
@@ -40,6 +40,11 @@ INSTALLED_APPS = [
     'core',
     'account',
     'dashboard',
+    'drf_redesign',
+    'rest_framework',
+    'rest_framework.authtoken',
+    
+ 
 ]
 
 MIDDLEWARE = [
@@ -126,13 +131,24 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 # Additional locations of static files
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
+if DEBUG:
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static'),
+    ]
 
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SESSION_COOKIE_AGE_REMEMBER = 60 * 60 * 24 * 30 * 3  # 3 months in seconds
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+
+        'rest_framework.authentication.SessionAuthentication',  # Example: Session authentication
+        'rest_framework.authentication.BasicAuthentication',  # Example: Basic authentication (use with caution)
+    ],
+}

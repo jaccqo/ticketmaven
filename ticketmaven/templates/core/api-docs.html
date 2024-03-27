@@ -1,0 +1,224 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    API - Ticketmaven
+{% endblock %}
+
+{% block content %}
+
+
+
+
+<section class="jarallax py-0 container mt-5" data-jarallax data-speed="0.4">
+ 
+    <span class="position-absolute top-0 start-0 w-100 h-100 dots-particles-js " id="dots-particles-js"></span>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="mt-5 mb-4">API Documentation</h1>
+            <div class="list-group">
+                <!-- API Documentation content goes here -->
+
+     
+                    <!-- API Home -->
+                    <a href="#" class="list-group-item list-group-item-action api-link" data-toggle="collapse" data-target="#api-home">
+                        API Home
+                    </a>
+                    <div id="api-home" class="collapse">
+                        <!-- Add content for API Home if needed -->
+                    </div>
+            
+                    <!-- User Profiles -->
+                    <a href="#" class="list-group-item list-group-item-action api-link" data-toggle="collapse" data-target="#user-profiles">
+                        User Profiles
+                    </a>
+                    <div id="user-profiles" class="collapse">
+                        <ul class="list-group">
+                            <!-- CRUD Endpoints for User Profiles -->
+                            <li class="list-group-item"><code>GET /api/user-profiles/</code> - List all user profiles</li>
+                            <li class="list-group-item"><code>POST /api/user-profiles/</code> - Create a new user profile</li>
+                            <li class="list-group-item"><code>GET /api/user-profiles/{id}/</code> - Retrieve a user profile by ID</li>
+                            <li class="list-group-item"><code>PUT /api/user-profiles/{id}/</code> - Update a user profile by ID</li>
+                            <li class="list-group-item"><code>DELETE /api/user-profiles/{id}/</code> - Delete a user profile by ID</li>
+                        </ul>
+                        <p><strong>Note:</strong> Token authentication is required for these endpoints.</p>
+                        <p><strong>Example:</strong> Retrieve user profile with ID 1: <code>GET /api/user-profiles/1/</code></p>
+                    </div>
+            
+                    <!-- Activities -->
+                    <a href="#" class="list-group-item list-group-item-action api-link" data-toggle="collapse" data-target="#activities">
+                        Activities
+                    </a>
+                    <div id="activities" class="collapse">
+                        <ul class="list-group">
+                            <!-- CRUD Endpoints for Activities -->
+                            <li class="list-group-item"><code>GET /api/activities/</code> - List all activities</li>
+                            <li class="list-group-item"><code>POST /api/activities/</code> - Create a new activity</li>
+                            <li class="list-group-item"><code>GET /api/activities/{id}/</code> - Retrieve an activity by ID</li>
+                            <li class="list-group-item"><code>PUT /api/activities/{id}/</code> - Update an activity by ID</li>
+                            <li class="list-group-item"><code>DELETE /api/activities/{id}/</code> - Delete an activity by ID</li>
+                        </ul>
+                        <p><strong>Note:</strong> Token authentication is required for these endpoints.</p>
+                        <p><strong>Example:</strong> Retrieve activity with ID 1: <code>GET /api/activities/1/</code></p>
+                    </div>
+            
+                     <!-- Ticket Purchases -->
+                     <a href="#" class="list-group-item list-group-item-action api-link" data-toggle="collapse" data-target="#ticket-purchases">
+                        Ticket Purchases
+                    </a>
+                    <div id="ticket-purchases" class="collapse">
+                        <ul class="list-group">
+                            <!-- CRUD Endpoints for Ticket Purchases -->
+                            <li class="list-group-item"><code>GET /api/ticket-purchases/</code> - List all ticket purchases</li>
+                            <li class="list-group-item"><code>POST /api/ticket-purchases/</code> - Create a new ticket purchase</li>
+                            <li class="list-group-item"><code>GET /api/ticket-purchases/{id}/</code> - Retrieve a ticket purchase by ID</li>
+                            <li class="list-group-item"><code>PUT /api/ticket-purchases/{id}/</code> - Update a ticket purchase by ID</li>
+                            <li class="list-group-item"><code>DELETE /api/ticket-purchases/{id}/</code> - Delete a ticket purchase by ID</li>
+                        </ul>
+                        <p><strong>Note:</strong> Token authentication is required for these endpoints.</p>
+                        <p><strong>Example:</strong> Retrieve ticket purchase with ID 1: <code>GET /api/ticket-purchases/1/</code></p>
+                    </div>
+            
+                    <!-- Debit Card Spending -->
+                    <a href="#" class="list-group-item list-group-item-action api-link" data-toggle="collapse" data-target="#debit-card-spending">
+                        Debit Card Spending
+                    </a>
+                    <div id="debit-card-spending" class="collapse">
+                        <ul class="list-group">
+                            <!-- CRUD Endpoints for Debit Card Spending -->
+                            <li class="list-group-item"><code>GET /api/debit-card-spending/</code> - List all debit card spending</li>
+                            <li class="list-group-item"><code>POST /api/debit-card-spending/</code> - Create a new debit card spending record</li>
+                            <li class="list-group-item"><code>GET /api/debit-card-spending/{id}/</code> - Retrieve a debit card spending record by ID</li>
+                            <li class="list-group-item"><code>PUT /api/debit-card-spending/{id}/</code> - Update a debit card spending record by ID</li>
+                            <li class="list-group-item"><code>DELETE /api/debit-card-spending/{id}/</code> - Delete a debit card spending record by ID</li>
+                        </ul>
+                        
+                        <p><strong>Note:</strong> Token authentication is required for these endpoints.</p>
+                    </div>
+            
+                    <!-- Team -->
+                    <a href="#" class="list-group-item list-group-item-action api-link" data-toggle="collapse" data-target="#teams">
+                        Team
+                    </a>
+                    <div id="teams" class="collapse">
+                        <ul class="list-group">
+                            <!-- CRUD Endpoints for Team -->
+                            <li class="list-group-item">
+                                <h5>Create Team</h5>
+                                <p>POST: /api/teams/</p>
+                                <p>Create a new team</p>
+                            </li>
+                            <li class="list-group-item">
+                                <h5>Retrieve, Update, Delete Team</h5>
+                                <p>GET/PUT/DELETE: /api/teams/{team_id}/</p>
+                                <p>Retrieve, update, or delete a specific team</p>
+                            </li>
+                        </ul>
+                        
+                        <p><strong>Note:</strong> Token authentication is required for these endpoints.</p>
+                    </div>
+            
+                    <!-- Teams Ticket Purchases -->
+                    <a href="#" class="list-group-item list-group-item-action api-link" data-toggle="collapse" data-target="#teams-ticket-purchases">
+                        Teams Ticket Purchases
+                    </a>
+                    <div id="teams-ticket-purchases" class="collapse">
+                        <ul class="list-group">
+                            <!-- CRUD Endpoints for Teams Ticket Purchases -->
+                            <li class="list-group-item">
+                                <h5>Create Teams Ticket Purchase</h5>
+                                <p>POST: /api/teams-ticket-purchases/</p>
+                                <p>Create a new ticket purchase for a team</p>
+                            </li>
+                            <li class="list-group-item">
+                                <h5>Retrieve, Update, Delete Teams Ticket Purchase</h5>
+                                <p>GET/PUT/DELETE: /api/teams-ticket-purchases/{purchase_id}/</p>
+                                <p>Retrieve, update, or delete a specific ticket purchase for a team</p>
+                            </li>
+                        </ul>
+                        
+                        <p><strong>Note:</strong> Token authentication is required for these endpoints.</p>
+                    </div>
+              
+            </div>
+
+
+            <div class="card shadow mt-5">
+                <div class="card-body">
+         
+            {% if request.session.auth_token %}
+            <div class="mt-3">
+                <h4>Your API Token:</h4>
+                <p id="api-token">{{ request.session.auth_token }}</p>
+                <button class="btn btn-secondary copy-button" onclick="copyToClipboard()">Copy</button>
+            </div>
+            {% else %}
+            <div class="mt-3">
+                <p>No API Token available</p>
+            </div>
+            {% endif %}
+
+            <div id="copied-message" style="display: none;" class="alert alert-success mt-3" role="alert">
+                Copied!
+            </div>
+            
+          </div>
+          </div>
+
+
+        </div>
+
+
+        <div class="col-md-6">
+            <h1 class="mt-5 mb-4">API URLs</h1>
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title">API URLs</h5>
+                    <ul class="list-group">
+                        <!-- CRUD Endpoints for Debit Card Spending -->
+                        <li class="list-group-item"><a href="{% url 'core:api-docs' %}" class="text-decoration-none">API Documentation Home</a></li>
+                        <li class="list-group-item"><a href="{% url 'core:user-profile-list-create' %}" class="text-decoration-none">User Profiles</a></li>
+                        <li class="list-group-item"><a href="{% url 'core:activity-list-create' %}" class="text-decoration-none">Activities</a></li>
+                        <li class="list-group-item"><a href="{% url 'core:ticket-purchase-list-create' %}" class="text-decoration-none">Ticket Purchases</a></li>
+                        <li class="list-group-item"><a href="{% url 'core:debit-card-spending-list-create' %}" class="text-decoration-none">Debit Card Spending</a></li>
+                        <li class="list-group-item"><a href="{% url 'core:team-list-create' %}" class="text-decoration-none">Team</a></li>
+                        <li class="list-group-item"><a href="{% url 'core:teams-ticket-purchase-list-create' %}" class="text-decoration-none">Teams Ticket Purchases</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+    
+
+
+
+<script>
+    function copyToClipboard() {
+        var tokenText = document.getElementById("api-token");
+        var range = document.createRange();
+        range.selectNode(tokenText);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand("copy");
+        window.getSelection().removeAllRanges();
+
+        // Show "Copied" message with fade in and fade out effect
+        var copiedMessage = $("#copied-message");
+        copiedMessage.fadeIn();
+        setTimeout(function() {
+            copiedMessage.fadeOut();
+        }, 1500); // Adjust the duration as needed
+    }
+</script>
+
+<!-- Include Bootstrap JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}
+
+

@@ -36,6 +36,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css
 
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
 <style>
     .dot {
         height: 8px; /* Adjust height as needed */
@@ -131,69 +135,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css
                         </button>
 
                         <!-- Topbar Search Form -->
-                        <div class="app-search dropdown d-none d-lg-block">
-                            <form>
-                                <div class="input-group">
-                                    <input type="search" class="form-control dropdown-toggle" placeholder="Search..." id="top-search">
-                                    <span class="fas fa-search search-icon"></span>
-                                    <button class="input-group-text btn btn-primary" type="submit">Search</button>
-                                </div>
-                            </form>
                         
-                            <div class="dropdown-menu dropdown-menu-animated dropdown-lg" id="search-dropdown">
-                                <!-- item-->
-                                <div class="dropdown-header noti-title">
-                                    <h5 class="text-overflow mb-2">Found <span class="text-danger">17</span> results</h5>
-                                </div>
-                        
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i class="fas fa-file-alt me-1"></i>
-                                    <span>Analytics Report</span>
-                                </a>
-                        
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i class="fas fa-life-ring me-1"></i>
-                                    <span>How can I help you?</span>
-                                </a>
-                        
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i class="fas fa-cog me-1"></i>
-                                    <span>User profile settings</span>
-                                </a>
-                        
-                                <!-- item-->
-                                <div class="dropdown-header noti-title">
-                                    <h6 class="text-overflow mb-2 text-uppercase">Users</h6>
-                                </div>
-                        
-                                <div class="notification-list">
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="d-flex">
-                                            <img class="d-flex me-2 rounded-circle" src="{% static 'assets/images/users/avatar-2.jpg' %}" alt="Generic placeholder image" height="32">
-                                            <div class="w-100">
-                                                <h5 class="m-0 font-14">Erwin Brown</h5>
-                                                <span class="font-12 mb-0">UI Designer</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                        
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="d-flex">
-                                            <img class="d-flex me-2 rounded-circle" src="{% static 'assets/images/users/avatar-5.jpg' %}" alt="Generic placeholder image" height="32">
-                                            <div class="w-100">
-                                                <h5 class="m-0 font-14">Jacob Deo</h5>
-                                                <span class="font-12 mb-0">Developer</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
                         
                     </div>
 
@@ -219,38 +161,35 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css
                     
 
 
+                        
+                                                <!-- Language selection dropdown -->
                         <li class="dropdown">
                             <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                               
                                 <img src="{% static 'dash-assets/images/flags/us.jpg' %}" alt="user-image" class="me-1" height="12"> 
                                 <span class="align-middle d-none d-lg-inline-block">English</span> <i class="fas fa-chevron-down d-none d-sm-inline-block align-middle"></i>
                             </a>
 
-
+                            <!-- Language dropdown menu -->
                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated">
-                            
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">
+                                <!-- German -->
+                                <a href="#" class="dropdown-item" onclick="translateTo('de')">
                                     <img src="{% static 'dash-assets/images/flags/germany.jpg' %}" alt="user-image" class="me-1" height="12"> <span class="align-middle">German</span>
                                 </a>
-                            
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">
+                                <!-- Italian -->
+                                <a href="#" class="dropdown-item" onclick="translateTo('it')">
                                     <img src="{% static 'dash-assets/images/flags/italy.jpg' %}" alt="user-image" class="me-1" height="12"> <span class="align-middle">Italian</span>
                                 </a>
-                            
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">
+                                <!-- Spanish -->
+                                <a href="#" class="dropdown-item" onclick="translateTo('es')">
                                     <img src="{% static 'dash-assets/images/flags/spain.jpg' %}" alt="user-image" class="me-1" height="12"> <span class="align-middle">Spanish</span>
                                 </a>
-                            
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">
+                                <!-- Russian -->
+                                <a href="#" class="dropdown-item" onclick="translateTo('ru')">
                                     <img src="{% static 'dash-assets/images/flags/russia.jpg' %}" alt="user-image" class="me-1" height="12"> <span class="align-middle">Russian</span>
                                 </a>
-                            
                             </div>
                         </li>
+
 
 
                       
@@ -531,14 +470,14 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css
                         <li class="side-nav-title">Navigation</li>
 
                         <li class="side-nav-item">
-                            <a data-bs-toggle="collapse" href="#sidebarDashboards" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                            <a href="{%url 'core:api-docs'%}" class="px-3 py-3" >
                                 <i class="fas fa-code"></i>
                                 
-                                <span class="badge bg-success float-end">5</span>
-                                <span> API </span>
+                                <span class="badge bg-success float-end">.</span>
+                                <span > API  </span>
                             </a>
                             
-                            <div class="collapse" id="sidebarDashboards">
+                            {% comment %} <div class="collapse" id="sidebarDashboards">
                                 <ul class="side-nav-second-level">
                                     <li>
                                         <a href="dashboard-analytics.html">Analytics</a>
@@ -556,7 +495,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css
                                         <a href="dashboard-wallet.html">E-Wallet</a>
                                     </li>
                                 </ul>
-                            </div>
+                            </div> {% endcomment %}
                         </li>
 
                         
@@ -598,23 +537,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css
                             <div class="col-12">
                                 <div class="page-title-box">                                    
                                     <div class="page-title-right">
-                                        <form class="d-flex">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control form-control-light" id="dash-daterange">
-                                                <span class="input-group-text bg-primary border-primary text-white">
-                                                    <i class="fas fa-calendar-alt"></i>
-                                                </span>
-                                            </div>
-                                            <a href="javascript:void(0);" class="btn btn-primary ms-2">
-                                                <i class="fas fa-sync-alt"></i>
-                                            </a>
-                                            <a href="javascript:void(0);" class="btn btn-primary ms-1">
-                                                <i class="fas fa-filter"></i>
-                                            </a>
-                                        </form>
+                                        
                                         
                                     </div>
-                                    <h4 class="page-title">Dashboard</h4>
+                                    <h4 class="page-title">Ticket bot dashboard</h4>
                                 </div>
                             </div>
                         </div>
@@ -672,7 +598,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css
                             <div class="col-xl-7 col-lg-6">
                                 <div class="card card-h-100">
                                     <div class="d-flex card-header justify-content-between align-items-center">
-                                        <h4 class="header-title"> Ticket Purchase Analytics</h4>
+                                        <h4 class="header-title"> Purchased Tickets Analytics</h4>
                                         <div class="dropdown">
                                             <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
                                                 <i class="fas fa-ellipsis-v"></i>
@@ -691,7 +617,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css
                                     </div>
                                     <div class="card-body pt-0">
                                         <div dir="ltr">
-                                            <div id="high-performing-product" class="apex-charts" data-colors="#727cf5,#91a6bd40"></div>
+                                           <div id="high-performing-product" class="apex-charts" data-colors="#10eb90,#6973e3"></div>
+
                                         </div>
                                     </div> <!-- end card-body-->
                                 </div> <!-- end card-->
@@ -702,39 +629,54 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css
                         <!-- end row -->
 
                         <div class="row">
-                            <div class="col-lg-8">
+                            <div class="col-lg-12">
                                 <div class="card">
-                                    <div class="d-flex card-header justify-content-between align-items-center">
-                                        <h4 class="header-title">Card Spending</h4>
-                                        <i class="fab fa-cc-visa"></i>
+                                    <div class="d-flex card-header justify-content-between align-items-center debit-card">
+                                        <h4 class="header-title">Debit Card</h4>
+                                  
+                                        {% if user_profile.card_type %}
+                                            {% if user_profile.card_type == 'Visa' %}
+                                                <i class="fab fa-cc-visa" style="color: blue;"></i>
+                                            {% elif user_profile.card_type == 'MasterCard' %}
+                                                <i class="fab fa-cc-mastercard" style="color: red;"></i>
+                                            {% elif user_profile.card_type == 'American Express' %}
+                                                <i class="fab fa-cc-amex" style="color: green;"></i>
+                                            {% else %}
+                                                <!-- Default icon -->
+                                                <i class="fas fa-credit-card" style="color: black;"></i>
+                                            {% endif %}
+                                        {% else %}
+                                            <!-- Default icon when card type is not available -->
+                                            <i class="fas fa-credit-card" style="color: black;"></i>
+                                        {% endif %}
+
                                         <div class="dropdown">
                                             <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
                                                 <i class="fas fa-caret-down"></i>
                                             </a>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <!-- item-->
-                                                <a href="javascript:void(0);" class="dropdown-item">Visa</a>
-                                                <!-- item-->
-                                                <a href="javascript:void(0);" class="dropdown-item">MasterCard</a>
-                                                <!-- item-->
-                                                <a href="javascript:void(0);" class="dropdown-item">American Express</a>
-                                            </div>
+                                            <!-- Dropdown menu items here -->
                                         </div>
                                     </div>
-                                    <div class="card-body pt-0">
+                                    
+                                    <div class="card-body pt-0 debit-info">
                                         <div class="chart-content-bg">
                                             <div class="row text-center">
                                                 <div class="col-sm-6">
                                                     <p class="text-muted mb-0 mt-3" style="font-family: 'Arial', sans-serif; font-size: 14px;">Card Ending Numbers</p>
-                                                    <h2 class="fw-normal mb-3 debit-card" style="font-family: 'Arial', sans-serif; font-size: 18px;">
+                                                    <h2 class="fw-normal mb-3" style="font-family: 'Arial', sans-serif; font-size: 18px;">
                                                         <small class="fas fa-circle text-primary align-middle me-1"></small>
-                                                        <span style="font-family: 'Arial', sans-serif;">
+                                                        <span style="font-family: 'Arial', sans-serif;" class="f-sm">
                                                             {% if user.userprofile.credit_card_number %}
-                                                                XXXX XXXX XXXX {{ user.userprofile.credit_card_number|slice:"-4:" }}
+                                                                XXXX XXXX XXXX {{ user.userprofile.credit_card_number|slice:"-4:" }} 
+                                                                {% if user.userprofile.expiry_date  %}
+                                                                    <br>
+                                                                    Expiry: {{ user.userprofile.expiry_date }}/{{ user.userprofile.expiry_year }}
+                                                                {% endif %}
                                                             {% else %}
                                                                 No credit card added
                                                             {% endif %}
                                                         </span>
+                                                        
                                                     </h2>
                                                 </div>
                                                 
@@ -742,77 +684,22 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css
                                                     <p class="text-muted mb-0 mt-3" style="font-family: 'Arial', sans-serif; font-size: 14px;">Today's Spending</p>
                                                     <h2 class="fw-normal mb-3" style="font-family: 'Arial', sans-serif; font-size: 18px;">
                                                         <small class="fas fa-circle text-primary align-middle me-1"></small>
-                                                        <span style="font-family: 'Arial', sans-serif;">$1,000</span> <!-- Replace $2,562.30 with actual spending -->
+                                                        <span style="font-family: 'Arial', sans-serif;">$0</span> <!-- Replace $2,562.30 with actual spending -->
                                                     </h2>
                                                 </div>
                                             </div>
                                         </div>
                                         
                                         
-                                        <div dir="ltr">
+                                        {% comment %} <div dir="ltr">
                                             <div id="revenue-chart" class="apex-charts mt-3" data-colors="#727cf5,#0acf97"></div>
-                                        </div>
+                                        </div> {% endcomment %}
                                     </div> <!-- end card-body-->
                                 </div> <!-- end card-->
                             </div> <!-- end col-->
                             
 
-                            <div class="col-lg-4">
-                                <div class="card">
-                                    <div class="d-flex card-header justify-content-between align-items-center">
-                                        <h4 class="header-title">Proxy Requests Locations</h4>
-                                        <div class="dropdown">
-                                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="fas fa-ellipsis-v"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <!-- Add your SAAS-specific options here -->
-                                                <a href="javascript:void(0);" class="dropdown-item">View All Proxies</a>
-                                                <a href="javascript:void(0);" class="dropdown-item">Export Proxies</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-
-                                    <div class="card-body pt-0">
-                                        <div class="mb-4 mt-3">
-                                            <div id="world-map-markers" style="height: 217px"></div>
-                                        </div>
-
-                                        <h5 class="mb-1 mt-0 fw-normal">New York</h5>
-                                        <div class="progress-w-percent">
-                                            <span class="progress-value fw-bold">72</span>
-                                            <div class="progress progress-sm">
-                                                <div class="progress-bar" role="progressbar" style="width: 72%;" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-
-                                        <h5 class="mb-1 mt-0 fw-normal">San Francisco</h5>
-                                        <div class="progress-w-percent">
-                                            <span class="progress-value fw-bold">39 </span>
-                                            <div class="progress progress-sm">
-                                                <div class="progress-bar" role="progressbar" style="width: 39%;" aria-valuenow="39" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-
-                                        <h5 class="mb-1 mt-0 fw-normal">Sydney</h5>
-                                        <div class="progress-w-percent">
-                                            <span class="progress-value fw-bold">25 </span>
-                                            <div class="progress progress-sm">
-                                                <div class="progress-bar" role="progressbar" style="width: 39%;" aria-valuenow="39" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-
-                                        <h5 class="mb-1 mt-0 fw-normal">Singapore</h5>
-                                        <div class="progress-w-percent mb-0">
-                                            <span class="progress-value fw-bold">61</span>
-                                            <div class="progress progress-sm">
-                                                <div class="progress-bar" role="progressbar" style="width: 61%;" aria-valuenow="61" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- end card-body-->
-                                </div> <!-- end card-->
-                            </div> <!-- end col-->
+                            
                         </div>
                         <!-- end row -->
 
@@ -867,48 +754,34 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css
                             <div class="col-xl-3 col-lg-6 order-lg-1">
                                 <div class="card" >
                                     <div class="d-flex card-header justify-content-between align-items-center">
-                                        <h4 class="header-title">Spending Limit</h4>
+                                        {% if user.userprofile.credit_card_number %}
+                                         <span class="f-sm"> XXXX XXXX XXXX {{ user.userprofile.credit_card_number|slice:"-4:" }}   Spending</span>
+                                        {% else %}
+                                            No credit card added
+                                        {% endif %}
+                
+
                                         <div class="dropdown">
                                             <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
                                                 <i class="fas fa-ellipsis-v"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end">
-                                                <!-- item-->
-                                                <a href="javascript:void(0);" class="dropdown-item">Sales Report</a>
+                     
                                                 <!-- item-->
                                                 <a href="javascript:void(0);" class="dropdown-item">Export Report</a>
                                                 <!-- item-->
-                                                <a href="javascript:void(0);" class="dropdown-item">Profit</a>
-                                                <!-- item-->
-                                                <a href="javascript:void(0);" class="dropdown-item">Action</a>
+   
                                             </div>
                                         </div>
                                     </div>
                                 
                                     <div class="card-body pt-0" data-simplebar style="max-height: 403px;">
-                                        <div id="average-sales" class="apex-charts mb-4 mt-2" data-colors="#727cf5,#0acf97,#fa5c7c,#ffbc00"></div>
-                                
-                                        <div class="chart-widget-list">
-                                            <p>
-                                                <i class="fab fa-cc-visa text-primary"></i> Visa
-                                                <span class="float-end">$2000.00</span> <!-- Replace $2000.00 with actual spending limit -->
-                                            </p>
-                                            <p>
-                                                <i class="fab fa-cc-mastercard text-danger"></i> MasterCard
-                                                <span class="float-end">$2500.00</span> <!-- Replace $2500.00 with actual spending limit -->
-                                            </p>
-                                            <p>
-                                                <i class="fab fa-cc-amex text-success"></i> American Express
-                                                <span class="float-end">$3000.00</span> <!-- Replace $3000.00 with actual spending limit -->
-                                            </p>
-                                            <p class="mb-0">
-                                                <i class="fab fa-cc-discover text-warning"></i> Discover
-                                                <span class="float-end">$3500.00</span> <!-- Replace $3500.00 with actual spending limit -->
-                                            </p>
-                                        </div>
-                                        
+                                        <div id="debit-card-spending" class="apex-charts mb-4 mt-2" data-colors="#727cf5,#0acf97,#fa5c7c,#ffbc00,#ff7043,#9c27b0,#4caf50"></div>
+
                                     </div> <!-- end card-body-->
                                 </div> <!-- end card-->
+
+                                
                                 
                             </div> <!-- end col-->
 
@@ -1738,6 +1611,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css
                         <input type="text" class="form-control" id="creditCardNumber" required>
                     </div>
                     <div class="mb-3">
+                        <label for="expiryDate" class="form-label">Expiry Date (MM/YY)</label>
+                        <input type="text" class="form-control" id="expiryDate" required>
+                    </div>
+                    <div class="mb-3">
                         <label for="cvv" class="form-label">CVV</label>
                         <input type="text" class="form-control" id="cvv" required>
                     </div>
@@ -1747,6 +1624,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css
         </div>
     </div>
 </div>
+
 
 
           
@@ -1769,12 +1647,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css
 <script src="{% static 'dash-assets/vendor/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js' %}"></script>
 
 <!-- Dashboard App js -->
-<script src="{% static 'dash-assets/js/pages/demo.dashboard.js' %}"></script>
+
+{% comment %} <script src="{% static 'dash-assets/js/pages/demo.dashboard.js' %}"></script> {% endcomment %}
 
 <!-- App js -->
 <script src="{% static 'dash-assets/js/app.min.js' %}"></script>
 
-
+<script src="{% static 'assets/js/dash-charts.js' %}"></script>
 
 <script>
     var particlesConfig = {
@@ -1992,6 +1871,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css
       
 
     particlesJS("particles-js", particlesConfig);
+    
     particlesJS("dots-particles-js", DotparticlesConfig);
 
             function setDotColor(dotElement, status) {
@@ -2273,14 +2153,24 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css
         event.preventDefault(); // Prevent default form submission
 
         // Get credit card information from form
-        var creditCardNumber = $('#creditCardNumber').val();
-        var cvv = $('#cvv').val();
+            var creditCardNumber = $('#creditCardNumber').val();
+            var cvv = $('#cvv').val();
+            var expiryDate = $('#expiryDate').val();  // Assuming you have an input field with id "expiryDate"
+            var expiryYear = $('#expiryYear').val();  // Assuming you have an input field with id "expiryYear"
 
-        // Prepare data to send to the server
-        var data = {
-            'credit_card_number': creditCardNumber,
-            'cvv': cvv
-        };
+                        // Split the expiry date to get the month and year separately
+            var expiryDateParts = expiryDate.split('/');
+            var expiryDate = expiryDateParts[0];
+            var expiryYear = expiryDateParts[1];
+
+            // Prepare data to send to the server
+            var data = {
+                'credit_card_number': creditCardNumber,
+                'cvv': cvv,
+                'expiry_date': expiryDate,
+                'expiry_year': expiryYear
+            };
+
         var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
 
         // Send AJAX request to Django view
@@ -2296,6 +2186,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css
                 $('#creditCardModal').modal('hide'); // Close the modal
                 
                 $(".debit-card").load(" .debit-card > *");
+                $(".debit-info").load(" .debit-info > *");
             },
             error: function(xhr, status, error) {
                 // Handle error response
@@ -2303,6 +2194,24 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css
             }
         });
     });
+
+
+    function translateTo(language) {
+        // Retrieve the content to be translated
+        var elementsToTranslate = document.querySelectorAll('[data-translate]');
+        var contentToTranslate = '';
+        elementsToTranslate.forEach(function(element) {
+            contentToTranslate += element.innerText + '\n';
+        });
+
+        // Perform translation using Google Translate API
+        google.translate.translate(contentToTranslate, 'en', language, function(translation) {
+            // Update the content with the translated text
+            elementsToTranslate.forEach(function(element, index) {
+                element.innerText = translation.translatedText.split('\n')[index];
+            });
+        });
+    }
 
 
 
