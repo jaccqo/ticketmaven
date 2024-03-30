@@ -23,10 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure--7n@z#ak9f$kadfyn4&@jhq7g0d3$c4z=eh19cgqi+u(1(_s(o'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["localhost","45.79.209.122","ticketmaven.com"]
-
 
 # Application definition
 
@@ -82,11 +81,12 @@ WSGI_APPLICATION = 'ticketmaven.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+HOME_DIR = os.path.expanduser("~")
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME':  os.path.join(HOME_DIR, 'maven_db.sqlite3'),
     }
 }
 
