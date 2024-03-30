@@ -3,6 +3,14 @@ from django.contrib.auth.models import User
 from django.db.models.functions import TruncMonth
 from django.db.models import Count
 from datetime import datetime
+from django.utils import timezone
+
+
+from django.db import models
+from django.utils import timezone
+
+from django.db import models
+from django.utils import timezone
 
 class TicketPurchase(models.Model):
     MONTH_CHOICES = [
@@ -21,19 +29,24 @@ class TicketPurchase(models.Model):
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    purchase_date = models.DateTimeField(default=datetime.now())
-    
+    purchase_date = models.DateTimeField(default=timezone.now)
     ticket_type = models.CharField(max_length=100)
     month = models.CharField(max_length=3, choices=MONTH_CHOICES, editable=False)
     projection = models.IntegerField(default=0)  # Projection for the month
+    quantity = models.IntegerField(default=0)
 
     def save(self, *args, **kwargs):
         # Automatically set the month abbreviation based on purchase_date
         self.month = self.purchase_date.strftime('%b')
-        super().save(*args, **kwargs)
+        super().save(*args, **kwargs)  # Call super().save() only once
 
     def __str__(self):
         return f'{self.user.username} - {self.ticket_type}'
+
+
+
+
+
 
 class MonthlyTicketPurchase(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -9,6 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
+from rest_framework import generics, status
 
 from dashboard.models import TicketPurchase, DebitCardSpending
 from dashboard.serializers import TicketPurchaseSerializer, DebitCardSpendingSerializer
@@ -16,6 +17,7 @@ from dashboard.serializers import TicketPurchaseSerializer, DebitCardSpendingSer
 
 from account.models import Team
 from account.serializers import TeamSerializer
+import datetime
 
 class CustomAuthToken(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
@@ -102,9 +104,7 @@ class TeamsTicketPurchaseListCreateAPIView(generics.ListCreateAPIView):
         profile=UserProfile.objects.get(user=user)
         return TeamsTicketPurchase.objects.filter(user_profile=profile)
     
-    def perform_create(self, serializer):
-            # Automatically set the user profile to the logged-in user's profile
-            serializer.save(user_profile=self.request.user.userprofile)
+    
 
 class TeamsTicketPurchaseRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     
@@ -129,9 +129,32 @@ class TicketPurchaseListCreateAPIView(generics.ListCreateAPIView):
         user = self.request.user
         return TicketPurchase.objects.filter(user=user)
     
+
     def perform_create(self, serializer):
-        # Automatically set the user profile to the logged-in user's profile
-        serializer.save(user=self.request.user)
+        # Check if there is an existing record for the same user, ticket type, and month
+        # Get current date and time
+        now = datetime.datetime.now()
+
+        # Format the month as a three-letter abbreviation
+        month_str = now.strftime('%b')
+
+        existing_record = TicketPurchase.objects.filter(
+            user=self.request.user,
+            month=month_str
+        ).first()
+
+        if existing_record:
+            # If an existing record is found, update the quantity and projection
+            existing_record.quantity += int(self.request.data.get('quantity', 0))
+            existing_record.projection += int(self.request.data.get('projection', 0))
+            existing_record.save()
+            serializer.instance = existing_record
+        else:
+            # If no existing record is found, create a new record
+            serializer.save(user=self.request.user)
+
+        # Return the response with the serializer instance
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 class TicketPurchaseRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     
